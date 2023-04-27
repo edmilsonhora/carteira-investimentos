@@ -1,4 +1,5 @@
-﻿using ESH_CalculadoraPrecoMedio.ApplicationService.Views;
+﻿using ESH_CalculadoraPrecoMedio.ApplicationService.Adapters;
+using ESH_CalculadoraPrecoMedio.ApplicationService.Views;
 using ESH_CalculadoraPrecoMedio.DomainModel;
 using System;
 using System.Collections.Generic;
@@ -19,17 +20,23 @@ namespace ESH_CalculadoraPrecoMedio.ApplicationService.Facades
 
         public void Excluir(int id)
         {
-            throw new NotImplementedException();
+            var provento = _repository.Proventos.ObterPor(id);
+            if(provento is not null)
+            {
+                var ativo = _repository.Ativos.ObterPor(provento.AtivoId);
+                ativo.RemoveProvento(provento);
+                _repository.Proventos.Excluir(provento);
+            }
         }
 
         public ProventoView ObterPor(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Proventos.ObterPor(id).ConvertToView();
         }
 
         public List<ProventoView> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _repository.Proventos.ObterTodos().ConvertToView();
         }
 
         public void Salvar(ProventoView view)

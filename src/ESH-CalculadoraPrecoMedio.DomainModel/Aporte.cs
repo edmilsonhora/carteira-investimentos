@@ -16,10 +16,6 @@ namespace ESH_CalculadoraPrecoMedio.DomainModel
         public DateTime DtCompra { get; set; }
         public decimal VlCompra { get; set; }
 
-        [NotMapped]
-        public IAporteRepository Repository { get; set; }
-
-
         public override void Validar()
         {
             CampoNumericoObrigatorio("AtivoId", AtivoId);
@@ -27,22 +23,6 @@ namespace ESH_CalculadoraPrecoMedio.DomainModel
             CampoDataObrigatorio("DtCompra", DtCompra);
             CampoNumericoObrigatorio("VlCompra", VlCompra);
             base.Validar();
-        }
-
-        public decimal CalcularPrecoMedio()
-        {           
-            var lista = Repository.ObterAportesPor(AtivoId);
-            decimal precoPonderado = (VlCompra * QtdCompra);
-            int quantidades = QtdCompra;
-
-            foreach (var item in lista)
-            {
-                precoPonderado += (item.VlCompra * item.QtdCompra);
-                quantidades += item.QtdCompra;
-            }
-
-            return (precoPonderado / quantidades);
-
         }
     }
 

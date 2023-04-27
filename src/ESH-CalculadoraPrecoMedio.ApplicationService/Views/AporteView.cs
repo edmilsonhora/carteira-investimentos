@@ -8,6 +8,7 @@ namespace ESH_CalculadoraPrecoMedio.ApplicationService.Views
 {
     public class AporteView
     {
+        public int Id { get; set; }
         public int AtivoId { get; set; }
         public int QtdCompra { get; set; }
         public DateTime DtCompra { get; set; }

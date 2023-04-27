@@ -8,29 +8,12 @@ namespace ESH_CalculadoraPrecoMedio.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AportesController : ControllerBase
+    public class ProventosController : ControllerBase
     {
         private readonly IFacade _facade;
-        public AportesController()
+        public ProventosController()
         {
-            _facade = new Facade();
-        }
-
-        [HttpPost]
-        [Route("salvar")]
-        public IActionResult Salvar(AporteView aporte)
-        {
-            try
-            {
-                _facade.Aportes.Salvar(aporte);
-                _facade.SaveChanges();
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message.Replace(Environment.NewLine, ";"));
-                 
-            }
+            this._facade = new Facade();
         }
 
         [HttpGet]
@@ -39,14 +22,13 @@ namespace ESH_CalculadoraPrecoMedio.API.Controllers
         {
             try
             {
-                _facade.Aportes.Excluir(id);
+                _facade.Proventos.Excluir(id);
                 _facade.SaveChanges();
                 return Ok();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message.Replace(Environment.NewLine, ";"));
-
             }
         }
     }
