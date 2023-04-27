@@ -9,11 +9,6 @@ namespace ESH_CalculadoraPrecoMedio.DomainModel
 {
     public class Ativo : EntityBase
     {
-        public Ativo()
-        {
-            Aportes = new List<Aporte>();
-            Proventos = new List<Provento>();
-        }
         public string Ticker { get; set; }
         public string CNPJ { get; set; }
         public TipoAtivo Tipo { get; set; }
@@ -26,7 +21,7 @@ namespace ESH_CalculadoraPrecoMedio.DomainModel
 
         public override void Validar()
         {
-            CampoTextoObrigatorio("Ticket", Ticker);
+            CampoTextoObrigatorio("Ticker", Ticker);
             CampoTextoObrigatorio("CNPJ", CNPJ);
 
             base.Validar();
@@ -35,15 +30,45 @@ namespace ESH_CalculadoraPrecoMedio.DomainModel
         public void AddAporte(Aporte aporte)
         {
             Aportes.Add(aporte);
-            PrecoMedio = aporte.CalcularPrecoMedio();
+            PrecoMedio = CalcularPrecoMedio();
             TotalInvestido += (aporte.VlCompra * aporte.QtdCompra);
             QtdTotal += aporte.QtdCompra;
+        }
+
+        public void RemoveAporte(Aporte aporte)
+        {
+            Aportes.Remove(aporte);
+            PrecoMedio = CalcularPrecoMedio();
+            TotalInvestido -= (aporte.VlCompra * aporte.QtdCompra);
+            QtdTotal -= aporte.QtdCompra;
+        }
+
+        private decimal CalcularPrecoMedio()
+        {           
+            decimal precoPonderado = 0;
+            int quantidades = 0;
+
+            foreach (var item in Aportes)
+            {
+                precoPonderado += (item.VlCompra * item.QtdCompra);
+                quantidades += item.QtdCompra;
+            }
+
+            if(quantidades == 0) { return 0; }
+
+            return (precoPonderado / quantidades);
         }
 
         public void AddProvento(Provento provento)
         {
             Proventos.Add(provento);
             TotalProventos += provento.VlTotalProvento;
+        }
+
+        public void RemoveProvento(Provento provento)
+        {
+            Proventos.Remove(provento);
+            TotalProventos -= provento.VlTotalProvento;
         }
     }
 

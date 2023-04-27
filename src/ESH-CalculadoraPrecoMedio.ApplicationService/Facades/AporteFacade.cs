@@ -1,4 +1,5 @@
-﻿using ESH_CalculadoraPrecoMedio.ApplicationService.Views;
+﻿using ESH_CalculadoraPrecoMedio.ApplicationService.Adapters;
+using ESH_CalculadoraPrecoMedio.ApplicationService.Views;
 using ESH_CalculadoraPrecoMedio.DomainModel;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace ESH_CalculadoraPrecoMedio.ApplicationService.Facades
 {
     internal class AporteFacade : IAporteFacade
     {
-        private IRepository _repository;
+        private readonly IRepository _repository;
         public AporteFacade(IRepository repository)
         {
             _repository = repository;
@@ -18,17 +19,23 @@ namespace ESH_CalculadoraPrecoMedio.ApplicationService.Facades
 
         public void Excluir(int id)
         {
-            throw new NotImplementedException();
+            var aporte = _repository.Aportes.ObterPor(id);
+            if(aporte is not null)
+            {
+                var ativo = _repository.Ativos.ObterPor(aporte.AtivoId);
+                ativo.RemoveAporte(aporte);
+                _repository.Aportes.Excluir(aporte);
+            }
         }
 
         public AporteView ObterPor(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Aportes.ObterPor(id).ConvertToView();
         }
 
         public List<AporteView> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _repository.Aportes.ObterTodos().ConvertToView();
         }
 
         public void Salvar(AporteView view)
@@ -38,14 +45,11 @@ namespace ESH_CalculadoraPrecoMedio.ApplicationService.Facades
             aporte.DtCompra = view.DtCompra;
             aporte.VlCompra = view.VlCompra;
             aporte.QtdCompra = view.QtdCompra;
-            aporte.Repository = _repository.Aportes;
 
             aporte.Validar();
 
             var ativo = _repository.Ativos.ObterPor(view.AtivoId);
             ativo.AddAporte(aporte);
-           
-
         }
     }
 }
