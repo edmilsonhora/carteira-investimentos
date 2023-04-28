@@ -43,7 +43,16 @@
             label1 = new Label();
             dropTicker = new ComboBox();
             groupBox2 = new GroupBox();
+            lblTotalInvestido = new Label();
+            label11 = new Label();
+            lblTotalProvRecebidos = new Label();
+            label9 = new Label();
             gridAtivos = new DataGridView();
+            Ticker = new DataGridViewTextBoxColumn();
+            QtdTotal = new DataGridViewTextBoxColumn();
+            TotalInvestido = new DataGridViewTextBoxColumn();
+            PrecoMedio = new DataGridViewTextBoxColumn();
+            TotalProventos = new DataGridViewTextBoxColumn();
             groupBox3 = new GroupBox();
             textVlUnProvento = new TextBox();
             btnSalvarProventos = new Button();
@@ -54,11 +63,6 @@
             txtDataProvento = new DateTimePicker();
             label8 = new Label();
             dropTicker2 = new ComboBox();
-            Ticker = new DataGridViewTextBoxColumn();
-            QtdTotal = new DataGridViewTextBoxColumn();
-            TotalInvestido = new DataGridViewTextBoxColumn();
-            PrecoMedio = new DataGridViewTextBoxColumn();
-            TotalProventos = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtQuantidade).BeginInit();
             groupBox2.SuspendLayout();
@@ -81,7 +85,7 @@
             groupBox1.Controls.Add(dropTicker);
             groupBox1.Location = new Point(24, 25);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(875, 157);
+            groupBox1.Size = new Size(875, 113);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Aportes:";
@@ -95,7 +99,7 @@
             // 
             // btnSalvarAportes
             // 
-            btnSalvarAportes.Location = new Point(31, 113);
+            btnSalvarAportes.Location = new Point(660, 56);
             btnSalvarAportes.Name = "btnSalvarAportes";
             btnSalvarAportes.Size = new Size(94, 29);
             btnSalvarAportes.TabIndex = 8;
@@ -169,13 +173,55 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(lblTotalInvestido);
+            groupBox2.Controls.Add(label11);
+            groupBox2.Controls.Add(lblTotalProvRecebidos);
+            groupBox2.Controls.Add(label9);
             groupBox2.Controls.Add(gridAtivos);
-            groupBox2.Location = new Point(26, 197);
+            groupBox2.Location = new Point(26, 144);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(873, 376);
+            groupBox2.Size = new Size(873, 423);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Ativos:";
+            // 
+            // lblTotalInvestido
+            // 
+            lblTotalInvestido.AutoSize = true;
+            lblTotalInvestido.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalInvestido.Location = new Point(141, 377);
+            lblTotalInvestido.Name = "lblTotalInvestido";
+            lblTotalInvestido.Size = new Size(138, 20);
+            lblTotalInvestido.TabIndex = 8;
+            lblTotalInvestido.Text = "[lblTotalInvestido]";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(21, 377);
+            label11.Name = "label11";
+            label11.Size = new Size(109, 20);
+            label11.TabIndex = 7;
+            label11.Text = "Total Investido:";
+            // 
+            // lblTotalProvRecebidos
+            // 
+            lblTotalProvRecebidos.AutoSize = true;
+            lblTotalProvRecebidos.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalProvRecebidos.Location = new Point(693, 380);
+            lblTotalProvRecebidos.Name = "lblTotalProvRecebidos";
+            lblTotalProvRecebidos.Size = new Size(176, 20);
+            lblTotalProvRecebidos.TabIndex = 6;
+            lblTotalProvRecebidos.Text = "[lblTotalProvRecebidos]";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(533, 380);
+            label9.Name = "label9";
+            label9.Size = new Size(154, 20);
+            label9.TabIndex = 5;
+            label9.Text = "Total Prov. Recebidos:";
             // 
             // gridAtivos
             // 
@@ -192,6 +238,62 @@
             gridAtivos.Size = new Size(823, 313);
             gridAtivos.TabIndex = 0;
             // 
+            // Ticker
+            // 
+            Ticker.DataPropertyName = "Ticker";
+            Ticker.HeaderText = "Ticker";
+            Ticker.MinimumWidth = 6;
+            Ticker.Name = "Ticker";
+            Ticker.ReadOnly = true;
+            Ticker.Width = 125;
+            // 
+            // QtdTotal
+            // 
+            QtdTotal.DataPropertyName = "QtdTotal";
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            QtdTotal.DefaultCellStyle = dataGridViewCellStyle1;
+            QtdTotal.HeaderText = "Qtd. Total";
+            QtdTotal.MinimumWidth = 6;
+            QtdTotal.Name = "QtdTotal";
+            QtdTotal.ReadOnly = true;
+            QtdTotal.Width = 125;
+            // 
+            // TotalInvestido
+            // 
+            TotalInvestido.DataPropertyName = "TotalInvestido";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            TotalInvestido.DefaultCellStyle = dataGridViewCellStyle2;
+            TotalInvestido.HeaderText = "Tot. Investido";
+            TotalInvestido.MinimumWidth = 6;
+            TotalInvestido.Name = "TotalInvestido";
+            TotalInvestido.ReadOnly = true;
+            TotalInvestido.Width = 155;
+            // 
+            // PrecoMedio
+            // 
+            PrecoMedio.DataPropertyName = "PrecoMedio";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            PrecoMedio.DefaultCellStyle = dataGridViewCellStyle3;
+            PrecoMedio.HeaderText = "Preço Médio";
+            PrecoMedio.MinimumWidth = 6;
+            PrecoMedio.Name = "PrecoMedio";
+            PrecoMedio.ReadOnly = true;
+            PrecoMedio.Width = 125;
+            // 
+            // TotalProventos
+            // 
+            TotalProventos.DataPropertyName = "TotalProventos";
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            TotalProventos.DefaultCellStyle = dataGridViewCellStyle4;
+            TotalProventos.HeaderText = "Tot. Proventos";
+            TotalProventos.MinimumWidth = 6;
+            TotalProventos.Name = "TotalProventos";
+            TotalProventos.ReadOnly = true;
+            TotalProventos.Width = 155;
+            // 
             // groupBox3
             // 
             groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -204,9 +306,9 @@
             groupBox3.Controls.Add(txtDataProvento);
             groupBox3.Controls.Add(label8);
             groupBox3.Controls.Add(dropTicker2);
-            groupBox3.Location = new Point(29, 607);
+            groupBox3.Location = new Point(29, 573);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(875, 157);
+            groupBox3.Size = new Size(875, 111);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "Proventos:";
@@ -220,7 +322,7 @@
             // 
             // btnSalvarProventos
             // 
-            btnSalvarProventos.Location = new Point(31, 113);
+            btnSalvarProventos.Location = new Point(668, 56);
             btnSalvarProventos.Name = "btnSalvarProventos";
             btnSalvarProventos.Size = new Size(94, 29);
             btnSalvarProventos.TabIndex = 8;
@@ -291,67 +393,11 @@
             dropTicker2.Size = new Size(153, 28);
             dropTicker2.TabIndex = 0;
             // 
-            // Ticker
-            // 
-            Ticker.DataPropertyName = "Ticker";
-            Ticker.HeaderText = "Ticker";
-            Ticker.MinimumWidth = 6;
-            Ticker.Name = "Ticker";
-            Ticker.ReadOnly = true;
-            Ticker.Width = 125;
-            // 
-            // QtdTotal
-            // 
-            QtdTotal.DataPropertyName = "QtdTotal";
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            QtdTotal.DefaultCellStyle = dataGridViewCellStyle1;
-            QtdTotal.HeaderText = "Qtd. Total";
-            QtdTotal.MinimumWidth = 6;
-            QtdTotal.Name = "QtdTotal";
-            QtdTotal.ReadOnly = true;
-            QtdTotal.Width = 125;
-            // 
-            // TotalInvestido
-            // 
-            TotalInvestido.DataPropertyName = "TotalInvestido";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            TotalInvestido.DefaultCellStyle = dataGridViewCellStyle2;
-            TotalInvestido.HeaderText = "Tot. Investido";
-            TotalInvestido.MinimumWidth = 6;
-            TotalInvestido.Name = "TotalInvestido";
-            TotalInvestido.ReadOnly = true;
-            TotalInvestido.Width = 155;
-            // 
-            // PrecoMedio
-            // 
-            PrecoMedio.DataPropertyName = "PrecoMedio";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            PrecoMedio.DefaultCellStyle = dataGridViewCellStyle3;
-            PrecoMedio.HeaderText = "Preço Médio";
-            PrecoMedio.MinimumWidth = 6;
-            PrecoMedio.Name = "PrecoMedio";
-            PrecoMedio.ReadOnly = true;
-            PrecoMedio.Width = 125;
-            // 
-            // TotalProventos
-            // 
-            TotalProventos.DataPropertyName = "TotalProventos";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            TotalProventos.DefaultCellStyle = dataGridViewCellStyle4;
-            TotalProventos.HeaderText = "Tot. Proventos";
-            TotalProventos.MinimumWidth = 6;
-            TotalProventos.Name = "TotalProventos";
-            TotalProventos.ReadOnly = true;
-            TotalProventos.Width = 155;
-            // 
             // Inicial
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(932, 775);
+            ClientSize = new Size(932, 722);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -361,6 +407,7 @@
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)txtQuantidade).EndInit();
             groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gridAtivos).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
@@ -397,5 +444,9 @@
         private DataGridViewTextBoxColumn TotalInvestido;
         private DataGridViewTextBoxColumn PrecoMedio;
         private DataGridViewTextBoxColumn TotalProventos;
+        private Label lblTotalProvRecebidos;
+        private Label label9;
+        private Label lblTotalInvestido;
+        private Label label11;
     }
 }
