@@ -26,8 +26,11 @@ namespace ESH_CarteiraInvestimentos.Win32
 
         private void CarregarGridAtivos()
         {
+            var lista = _facade.Ativos.ObterTodos();
             gridAtivos.DataSource = null;
-            gridAtivos.DataSource = _facade.Ativos.ObterTodos();
+            gridAtivos.DataSource = lista;
+            lblTotalProvRecebidos.Text = lista.Sum(p => p.TotalProventos).ToString("C");
+            lblTotalInvestido.Text = lista.Sum(p => p.TotalInvestido).ToString("C");
 
         }
 
