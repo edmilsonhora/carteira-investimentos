@@ -37,6 +37,8 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 Tipo = item.Tipo,
                 TotalInvestido = item.TotalInvestido,
                 TotalProventos = item.TotalProventos,
+                TotalResgatado = item.TotalResgatado,
+                SaldoAtual = item.SaldoAtual,
             };
         }
 
