@@ -20,5 +20,6 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Contexts
         public DbSet<Aporte> Aportes { get; set; }
         public DbSet<Ativo> Ativos { get; set; }
         public DbSet<Provento> Proventos { get; set; }
+        public DbSet<Venda> Vendas { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
         {
             return _contexto.Ativos.Include(p => p.Proventos)
                                    .Include(p => p.Aportes)
+                                   .Include(p => p.Vendas)
                                    .FirstOrDefault(p => p.Id == id);
         }
     }

@@ -20,10 +20,12 @@ namespace ESH_CarteiraInvestimentos.DataAccess
         private IAtivoRepository _ativos;
         private IAporteRepository _aportes;
         private IProventoRepository _proventos;
+        private IVendaRepository _vendas;
 
         public IAtivoRepository Ativos => _ativos ?? (_ativos = new AtivoRepository(_context));
         public IAporteRepository Aportes => _aportes ?? (_aportes = new AporteRepository(_context));
         public IProventoRepository Proventos => _proventos ?? (_proventos = new ProventoRepository(_context));
+        public IVendaRepository Vendas => _vendas ?? (_vendas = new VendaRepository(_context));
 
         public void SaveChanges()
         {
@@ -35,6 +37,7 @@ namespace ESH_CarteiraInvestimentos.DataAccess
             _ativos = null;
             _aportes = null;
             _proventos = null;
+            _vendas = null;
             _context = new MyContext();
         }
     }

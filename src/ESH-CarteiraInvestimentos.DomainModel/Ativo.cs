@@ -18,6 +18,9 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public decimal TotalProventos { get; set; }
         public List<Aporte> Aportes { get; set; }
         public List<Provento> Proventos { get; set; }
+        public List<Venda> Vendas { get; set; }
+        public decimal TotalResgatado { get; set; }
+        public decimal SaldoAtual { get { return decimal.Subtract(TotalInvestido, TotalResgatado); } }
 
         public override void Validar()
         {
@@ -69,6 +72,29 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         {
             Proventos.Remove(provento);
             TotalProventos -= provento.VlTotalProvento;
+        }
+
+        public void AddVenda(Venda venda)
+        {
+            if (venda.QtdVenda > QtdTotal)
+                throw new ApplicationException("Quantidade de venda maior que o Total.");
+
+            Vendas.Add(venda);
+            TotalResgatado += (venda.VlVenda * venda.QtdVenda);
+            QtdTotal -= venda.QtdVenda;
+            if (QtdTotal == 0)
+            {
+                PrecoMedio = 0;
+            }
+
+        }
+
+        public void RemoveVenda(Venda venda)
+        {
+            Vendas.Remove(venda);
+            TotalResgatado -= (venda.VlVenda * venda.QtdVenda);
+            QtdTotal += venda.QtdVenda;
+
         }
     }
 

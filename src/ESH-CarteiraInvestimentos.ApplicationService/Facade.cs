@@ -20,11 +20,13 @@ namespace ESH_CarteiraInvestimentos.ApplicationService
 
         private IAtivoFacade _ativos;
         private IAporteFacade _aportes;
-        private IProventoFacade _proventoFacade;
+        private IProventoFacade _proventos;
+        private IVendaFacade _vendas;
 
         public IAtivoFacade Ativos => _ativos ?? (_ativos = new AtivoFacade(_repository));
         public IAporteFacade Aportes => _aportes ?? (_aportes = new  AporteFacade(_repository));
-        public IProventoFacade Proventos => _proventoFacade ?? (_proventoFacade = new ProventoFacade(_repository));
+        public IProventoFacade Proventos => _proventos ?? (_proventos = new ProventoFacade(_repository));
+        public IVendaFacade Vendas => _vendas ?? (_vendas = new VendaFacade(_repository));
 
         public void SaveChanges()
         {
@@ -35,7 +37,8 @@ namespace ESH_CarteiraInvestimentos.ApplicationService
         {
             _ativos = null;
             _aportes = null;
-            _proventoFacade = null;
+            _proventos = null;
+            _vendas = null;
             _repository.Rollback();
         }
     }
