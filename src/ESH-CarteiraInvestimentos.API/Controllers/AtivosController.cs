@@ -10,9 +10,9 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
     public class AtivosController : ControllerBase
     {
         private readonly IFacade _facade;
-        public AtivosController()
+        public AtivosController(IFacade facade)
         {
-            _facade = new Facade();
+            _facade = facade;
         }
 
 

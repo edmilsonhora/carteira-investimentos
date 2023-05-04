@@ -1,5 +1,4 @@
-﻿using ESH_CarteiraInvestimentos.ApplicationService;
-using ESH_CarteiraInvestimentos.ApplicationService.Views;
+﻿using ESH_CarteiraInvestimentos.ApplicationService.Views;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,10 +7,10 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProventosController : ControllerBase
+    public class VendasController : ControllerBase
     {
         private readonly IFacade _facade;
-        public ProventosController(IFacade facade)
+        public VendasController(IFacade facade)
         {
             _facade = facade;
         }
@@ -22,7 +21,7 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
         {
             try
             {
-                _facade.Proventos.Excluir(id);
+                _facade.Vendas.Excluir(id);
                 _facade.SaveChanges();
                 return Ok();
             }

@@ -1,4 +1,5 @@
-﻿using ESH_CarteiraInvestimentos.ApplicationService.Views;
+﻿using ESH_CarteiraInvestimentos.ApplicationService.Adapters;
+using ESH_CarteiraInvestimentos.ApplicationService.Views;
 using ESH_CarteiraInvestimentos.DomainModel;
 using System;
 using System.Collections.Generic;
@@ -18,17 +19,23 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
         }
         public void Excluir(int id)
         {
-            throw new NotImplementedException();
+            var venda = _repository.Vendas.ObterPor(id);
+            if(venda != null)
+            {
+                var ativo = _repository.Ativos.ObterPor(id);
+                ativo.RemoveVenda(venda);
+                _repository.Vendas.Excluir(venda);
+            }
         }
 
         public VendaView ObterPor(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Vendas.ObterPor(id).ConvertToView();
         }
 
         public List<VendaView> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _repository.Vendas.ObterTodos().ConvertToView();
         }
 
         public void Salvar(VendaView view)

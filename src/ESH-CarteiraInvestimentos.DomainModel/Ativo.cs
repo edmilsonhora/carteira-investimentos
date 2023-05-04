@@ -94,7 +94,6 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             Vendas.Remove(venda);
             TotalResgatado -= (venda.VlVenda * venda.QtdVenda);
             QtdTotal += venda.QtdVenda;
-
         }
     }
 
