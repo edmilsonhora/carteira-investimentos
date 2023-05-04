@@ -12,9 +12,9 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
     public class AportesController : ControllerBase
     {
         private readonly IFacade _facade;
-        public AportesController()
+        public AportesController(IFacade facade)
         {
-            _facade = new Facade();
+            _facade = facade;
         }
 
         [HttpPost]

@@ -31,20 +31,27 @@ namespace ESH_CarteiraInvestimentos.Win32
             gridAtivos.DataSource = lista;
             lblTotalProvRecebidos.Text = lista.Sum(p => p.TotalProventos).ToString("C");
             lblTotalInvestido.Text = lista.Sum(p => p.TotalInvestido).ToString("C");
-
+            lblTotalResgatado.Text = lista.Sum(p => p.TotalResgatado).ToString("C");
+            lblTotalSaldoAtual.Text = lista.Sum(p => p.SaldoAtual).ToString("C");
         }
 
         private void CarregarDropsTickers()
         {
-            dropTicker.DataSource = _facade.Ativos.ObterTodos();
+            var listaAtivos = _facade.Ativos.ObterTodos();
+            dropTicker.DataSource = listaAtivos;
             dropTicker.DisplayMember = "Ticker";
             dropTicker.ValueMember = "Id";
             dropTicker.SelectedIndex = -1;
 
-            dropTicker2.DataSource = _facade.Ativos.ObterTodos();
+            dropTicker2.DataSource = listaAtivos;
             dropTicker2.DisplayMember = "Ticker";
             dropTicker2.ValueMember = "Id";
             dropTicker2.SelectedIndex = -1;
+
+            dropTicker3.DataSource = listaAtivos;
+            dropTicker3.DisplayMember = "Ticker";
+            dropTicker3.ValueMember = "Id";
+            dropTicker3.SelectedIndex = -1;
         }
 
         private AporteView ObterNovoAporte()
@@ -80,6 +87,23 @@ namespace ESH_CarteiraInvestimentos.Win32
                 QtdCotas = qtdCotas,
             };
         }
+
+        private VendaView ObterNovaVenda()
+        {
+            int qtdCotas = 0;
+            decimal vlUnVenda = 0;
+
+            int.TryParse(txtQuantidadeCotasVenda.Value.ToString(), out qtdCotas);
+            decimal.TryParse(textVlUnVenda.Text, out vlUnVenda);
+
+            return new VendaView()
+            {
+                AtivoId = Convert.ToInt32(dropTicker3.SelectedValue),
+                DtVenda = txtDataProvento.Value,
+                VlVenda = vlUnVenda,
+                QtdVenda = qtdCotas,
+            };
+        }
         private void LimparAporte()
         {
             dropTicker.SelectedIndex = -1;
@@ -92,6 +116,13 @@ namespace ESH_CarteiraInvestimentos.Win32
             dropTicker2.SelectedIndex = -1;
             txtQuantidadeCotas.Value = 1;
             textVlUnProvento.Text = string.Empty;
+        }
+
+        private void LimparVenda()
+        {
+            dropTicker3.SelectedIndex = -1;
+            txtQuantidadeCotasVenda.Value = 1;
+            textVlUnVenda.Text = string.Empty;
         }
 
         private void btnSalvarAportes_Click(object sender, EventArgs e)
@@ -122,8 +153,23 @@ namespace ESH_CarteiraInvestimentos.Win32
                 _facade.SaveChanges();
                 CarregarGridAtivos();
                 LimparProvento();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
+        private void btnSalvar_Vendas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                VendaView view = ObterNovaVenda();
 
+                _facade.Vendas.Salvar(view);
+                _facade.SaveChanges();
+                CarregarGridAtivos();
+                LimparVenda();
             }
             catch (Exception ex)
             {
