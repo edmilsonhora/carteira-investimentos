@@ -18,6 +18,11 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
             this._contexto = contexto;
         }
 
+        public bool JahExisteNaBaseDeDados(Ativo ativo)
+        {
+            return this._contexto.Ativos.Any(p => p.Ticker.ToLower() == ativo.Ticker.ToLower() && p.Id != ativo.Id);
+        }
+
         public new Ativo ObterPor(int id)
         {
             return _contexto.Ativos.Include(p => p.Proventos)
