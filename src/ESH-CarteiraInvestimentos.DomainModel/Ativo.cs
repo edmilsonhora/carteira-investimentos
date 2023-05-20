@@ -21,11 +21,17 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public List<Venda> Vendas { get; set; }
         public decimal TotalResgatado { get; set; }
         public decimal SaldoAtual { get { return decimal.Subtract(TotalInvestido, TotalResgatado); } }
+        [NotMapped]
+        public IRepository Repository { get; set; }
 
         public override void Validar()
         {
             CampoTextoObrigatorio("Ticker", Ticker);
             CampoTextoObrigatorio("CNPJ", CNPJ);
+            if (Repository.Ativos.JahExisteNaBaseDeDados(this))
+            {
+                RegrasQuebradas.Append($"O Ticker {Ticker} já existe na base de Dados.{Environment.NewLine}");
+            }
 
             base.Validar();
         }
@@ -99,6 +105,6 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
     public interface IAtivoRepository : IRepositoryBase<Ativo>
     {
-        
+        bool JahExisteNaBaseDeDados(Ativo ativo);
     }
 }
