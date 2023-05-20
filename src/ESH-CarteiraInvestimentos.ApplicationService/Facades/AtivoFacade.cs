@@ -26,11 +26,13 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
         }
         public AtivoView ObterPor(int id)
         {
-            return _repository.Ativos.ObterPor(id).ConvertToView();
+            decimal totalInvestido = _repository.Ativos.ObterSaldoTotalInvestido();
+            return _repository.Ativos.ObterPor(id).ConvertToView(totalInvestido);
         }
         public List<AtivoView> ObterTodos()
         {
-            return _repository.Ativos.ObterTodos().ConvertToView();
+            decimal totalInvestido = _repository.Ativos.ObterSaldoTotalInvestido();
+            return _repository.Ativos.ObterTodos().ConvertToView(totalInvestido);
         }
         public void Salvar(AtivoView view)
         {
@@ -38,6 +40,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
             obj.CNPJ = view.CNPJ;
             obj.Ticker = view.Ticker;
             obj.Tipo = view.Tipo;
+            obj.Repository = _repository;
             obj.Validar();
 
             _repository.Ativos.Salvar(obj);

@@ -22,6 +22,15 @@ namespace ESH_CarteiraInvestimentos.Win32
             gridAtivos.AutoGenerateColumns = false;
             CarregarDropsTickers();
             CarregarGridAtivos();
+            AtualizarData();
+        }
+
+        private void AtualizarData()
+        {
+            var hoje = DateTime.Now;
+            txtDataCompra.Value = hoje;
+            txtDataProvento.Value = hoje;
+            txtDataVenda.Value = hoje;
         }
 
         private void CarregarGridAtivos()
@@ -37,18 +46,17 @@ namespace ESH_CarteiraInvestimentos.Win32
 
         private void CarregarDropsTickers()
         {
-            var listaAtivos = _facade.Ativos.ObterTodos();
-            dropTicker.DataSource = listaAtivos;
+            dropTicker.DataSource = _facade.Ativos.ObterTodos();
             dropTicker.DisplayMember = "Ticker";
             dropTicker.ValueMember = "Id";
             dropTicker.SelectedIndex = -1;
 
-            dropTicker2.DataSource = listaAtivos;
+            dropTicker2.DataSource = _facade.Ativos.ObterTodos();
             dropTicker2.DisplayMember = "Ticker";
             dropTicker2.ValueMember = "Id";
             dropTicker2.SelectedIndex = -1;
 
-            dropTicker3.DataSource = listaAtivos;
+            dropTicker3.DataSource = _facade.Ativos.ObterTodos();
             dropTicker3.DisplayMember = "Ticker";
             dropTicker3.ValueMember = "Id";
             dropTicker3.SelectedIndex = -1;

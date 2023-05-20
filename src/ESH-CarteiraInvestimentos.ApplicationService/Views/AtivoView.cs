@@ -18,10 +18,8 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Views
         public decimal PrecoMedio { get; set; }
         public decimal TotalProventos { get; set; }
         public decimal TotalResgatado { get; set; }
-        public decimal SaldoAtual
-        {
-            get; set;
-        }
+        public decimal SaldoAtual { get; set; }
+        public string PercentualNaCarteira { get; set; }
     }
 
     public interface IAtivoFacade : IFacadeBase<AtivoView>
