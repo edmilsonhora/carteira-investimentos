@@ -20,7 +20,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public List<Provento> Proventos { get; set; }
         public List<Venda> Vendas { get; set; }
         public decimal TotalResgatado { get; set; }
-        public decimal SaldoAtual { get { return decimal.Subtract(TotalInvestido, TotalResgatado); } }
+        public decimal SaldoAtual { get { return CalculaSaldoAtual(); } }       
 
         public override void Validar()
         {
@@ -95,10 +95,20 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             TotalResgatado -= (venda.VlVenda * venda.QtdVenda);
             QtdTotal += venda.QtdVenda;
         }
+
+        public decimal CalculaPercentualNaCarteira(decimal totalInvestido)
+        {
+            return decimal.Divide(CalculaSaldoAtual(), totalInvestido);
+        }
+
+        private decimal CalculaSaldoAtual()
+        {
+            return decimal.Subtract(TotalInvestido, TotalResgatado);
+        }
     }
 
     public interface IAtivoRepository : IRepositoryBase<Ativo>
     {
-        
+        decimal ObterSaldoTotalInvestido();
     }
 }

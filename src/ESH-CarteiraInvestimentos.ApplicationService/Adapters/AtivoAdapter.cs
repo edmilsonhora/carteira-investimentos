@@ -10,20 +10,20 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
 {
     internal static class AtivoAdapter
     {
-        public static List<AtivoView> ConvertToView(this List<Ativo> list)
+        public static List<AtivoView> ConvertToView(this List<Ativo> list, decimal totalInvestido)
         {
             var novaLista = new List<AtivoView>();
 
             foreach (var ativo in list)
             {
-                novaLista.Add(ativo.ConvertToView());
+                novaLista.Add(ativo.ConvertToView(totalInvestido));
             }
 
             return novaLista;
 
         }
 
-        public static AtivoView ConvertToView(this Ativo item)
+        public static AtivoView ConvertToView(this Ativo item, decimal totalInvestido)
         {
             if (item == null) return new AtivoView();
 
@@ -39,6 +39,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 TotalProventos = item.TotalProventos,
                 TotalResgatado = item.TotalResgatado,
                 SaldoAtual = item.SaldoAtual,
+                PercentualNaCarteira = item.CalculaPercentualNaCarteira(totalInvestido).ToString("P2")
             };
         }
 

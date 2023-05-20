@@ -25,5 +25,10 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
                                    .Include(p => p.Vendas)
                                    .FirstOrDefault(p => p.Id == id);
         }
+
+        public decimal ObterSaldoTotalInvestido()
+        {
+            return _contexto.Ativos.Sum(p => p.TotalInvestido);
+        }
     }
 }
