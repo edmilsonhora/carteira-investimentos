@@ -39,7 +39,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 TotalProventos = item.TotalProventos,
                 TotalResgatado = item.TotalResgatado,
                 SaldoAtual = item.SaldoAtual,
-                PercentualNaCarteira = item.CalculaPercentualNaCarteira(totalInvestido).ToString("P2")
+                PercentualNaCarteira = item.CalculaPercentualNaCarteira(totalInvestido)
             };
         }
 

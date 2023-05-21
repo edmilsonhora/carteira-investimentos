@@ -18,6 +18,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public decimal TotalProventos { get; set; }
         public decimal TotalResgatado { get; set; }
         public decimal SaldoAtual { get; set; }
+        public  bool EhAtivo { get; set; }
         public List<Aporte> Aportes { get; set; }
         public List<Provento> Proventos { get; set; }
         public List<Venda> Vendas { get; set; }
@@ -94,6 +95,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             if (QtdTotal == 0)
             {
                 PrecoMedio = 0;
+                EhAtivo = false;
             }
         }
 

@@ -20,7 +20,7 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
 
         public bool JahExisteNaBaseDeDados(Ativo ativo)
         {
-            return this._contexto.Ativos.Any(p => p.Ticker.ToLower() == ativo.Ticker.ToLower() && p.Id != ativo.Id);
+            return this._contexto.Ativos.Any(p => p.Ticker.ToLower() == ativo.Ticker.ToLower() && p.Id != ativo.Id && p.EhAtivo);
         }
 
         public new Ativo ObterPor(int id)
@@ -33,7 +33,12 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
 
         public decimal ObterSaldoTotalInvestido()
         {
-            return _contexto.Ativos.Sum(p => p.TotalInvestido);
+            return _contexto.Ativos.Sum(p => p.SaldoAtual);
+        }
+
+        public new List<Ativo> ObterTodos()
+        {
+            return _contexto.Ativos.Where(p => p.EhAtivo).AsNoTracking().ToList();
         }
     }
 }

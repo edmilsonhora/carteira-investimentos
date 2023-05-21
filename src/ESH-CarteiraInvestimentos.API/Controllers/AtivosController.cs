@@ -17,8 +17,8 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
 
 
         [HttpPost]
-        [Route("salvar")]
-        public IActionResult Salvar(AtivoView ativo)
+        [Route("atualizar")]
+        public IActionResult Atualizar(AtivoView ativo)
         {
             try
             {
@@ -29,6 +29,22 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message.Replace(Environment.NewLine,";"));                
+            }
+        }
+
+        [HttpPost]
+        [Route("incluir")]
+        public IActionResult Incluir(AtivoInclusaoView ativo)
+        {
+            try
+            {
+                _facade.Ativos.Salvar(ativo);
+                _facade.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.Replace(Environment.NewLine, ";"));
             }
         }
 

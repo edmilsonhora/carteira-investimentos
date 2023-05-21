@@ -34,6 +34,7 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             groupBox1 = new GroupBox();
             textValorCompra = new TextBox();
             btnSalvarAportes = new Button();
@@ -634,6 +635,8 @@
             // PercentualNaCarteira
             // 
             PercentualNaCarteira.DataPropertyName = "PercentualNaCarteira";
+            dataGridViewCellStyle7.Format = "P2";
+            PercentualNaCarteira.DefaultCellStyle = dataGridViewCellStyle7;
             PercentualNaCarteira.HeaderText = "Percent (%)";
             PercentualNaCarteira.MinimumWidth = 6;
             PercentualNaCarteira.Name = "PercentualNaCarteira";

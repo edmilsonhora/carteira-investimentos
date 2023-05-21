@@ -45,5 +45,26 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
 
             _repository.Ativos.Salvar(obj);
         }
+
+        public void Salvar(AtivoInclusaoView view)
+        {
+            var obj = new Ativo();
+            obj.CNPJ = view.CNPJ;
+            obj.Ticker = view.Ticker;
+            obj.Tipo = view.Tipo;
+            obj.Repository = _repository;
+            obj.Aportes = new List<Aporte>();
+            obj.Validar();
+
+            var aporte = new Aporte();            
+            aporte.DtCompra = view.DtCompra;
+            aporte.VlCompra = view.VlCompra;
+            aporte.QtdCompra = view.QtdCompra;
+            aporte.Validar();
+
+            obj.Aportes.Add(aporte);
+
+            _repository.Ativos.Salvar(obj);
+        }
     }
 }
