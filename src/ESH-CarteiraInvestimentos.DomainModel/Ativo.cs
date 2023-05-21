@@ -16,14 +16,14 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public decimal TotalInvestido { get; set; }
         public decimal PrecoMedio { get; set; }
         public decimal TotalProventos { get; set; }
+        public decimal TotalResgatado { get; set; }
+        public decimal SaldoAtual { get; set; }
+        public  bool EhAtivo { get; set; }
         public List<Aporte> Aportes { get; set; }
         public List<Provento> Proventos { get; set; }
         public List<Venda> Vendas { get; set; }
-        public decimal TotalResgatado { get; set; }
-        
         [NotMapped]
-        public IRepository Repository { get; set; }
-        public decimal SaldoAtual { get { return CalculaSaldoAtual(); } }       
+        public IRepository Repository { get; set; }            
 
         public override void Validar()
         {
@@ -41,16 +41,18 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         {
             Aportes.Add(aporte);
             PrecoMedio = CalcularPrecoMedio();
-            TotalInvestido += (aporte.VlCompra * aporte.QtdCompra);
+            TotalInvestido += decimal.Multiply(aporte.VlCompra, aporte.QtdCompra);
             QtdTotal += aporte.QtdCompra;
+            CalculaSaldoAtual();
         }
 
         public void RemoveAporte(Aporte aporte)
         {
             Aportes.Remove(aporte);
             PrecoMedio = CalcularPrecoMedio();
-            TotalInvestido -= (aporte.VlCompra * aporte.QtdCompra);
+            TotalInvestido -= decimal.Multiply(aporte.VlCompra, aporte.QtdCompra);
             QtdTotal -= aporte.QtdCompra;
+            CalculaSaldoAtual() ;
         }
 
         private decimal CalcularPrecoMedio()
@@ -60,7 +62,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
             foreach (var item in Aportes)
             {
-                precoPonderado += (item.VlCompra * item.QtdCompra);
+                precoPonderado += decimal.Multiply(item.VlCompra, item.QtdCompra);
                 quantidades += item.QtdCompra;
             }
 
@@ -87,30 +89,32 @@ namespace ESH_CarteiraInvestimentos.DomainModel
                 throw new ApplicationException("Quantidade de venda maior que o Total.");
 
             Vendas.Add(venda);
-            TotalResgatado += (venda.VlVenda * venda.QtdVenda);
+            TotalResgatado += decimal.Multiply(venda.VlVenda, venda.QtdVenda);
             QtdTotal -= venda.QtdVenda;
+            CalculaSaldoAtual();
             if (QtdTotal == 0)
             {
                 PrecoMedio = 0;
+                EhAtivo = false;
             }
-
         }
 
         public void RemoveVenda(Venda venda)
         {
             Vendas.Remove(venda);
-            TotalResgatado -= (venda.VlVenda * venda.QtdVenda);
+            TotalResgatado -= decimal.Multiply(venda.VlVenda, venda.QtdVenda);
             QtdTotal += venda.QtdVenda;
+            CalculaSaldoAtual();
         }
 
         public decimal CalculaPercentualNaCarteira(decimal totalInvestido)
         {
-            return decimal.Divide(CalculaSaldoAtual(), totalInvestido);
+            return decimal.Divide(SaldoAtual, totalInvestido);
         }
 
-        private decimal CalculaSaldoAtual()
+        private void CalculaSaldoAtual()
         {
-            return decimal.Subtract(TotalInvestido, TotalResgatado);
+            SaldoAtual = decimal.Subtract(TotalInvestido, TotalResgatado);
         }
     }
 
