@@ -85,9 +85,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
         public void AddVenda(Venda venda)
         {
-            if (venda.QtdCotas > QtdTotal)
-                throw new ApplicationException("Quantidade de venda maior que o Total.");
-
+            venda.ValidaSePodeSerRealizada(QtdTotal);
             Vendas.Add(venda);
             TotalResgatado += venda.CalculaTotalVenda();
             QtdTotal -= venda.QtdCotas;

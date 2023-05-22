@@ -27,6 +27,14 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         {
             return decimal.Multiply(VlUnitario, QtdCotas);
         }
+
+        public void ValidaSePodeSerRealizada(int qtdTotal)
+        {
+            if (QtdCotas > qtdTotal)
+            {
+                throw new ApplicationException("Quantidade de venda maior que o Total.");
+            }
+        }
     }
 
     public interface IVendaRepository : IRepositoryBase<Venda> { }
