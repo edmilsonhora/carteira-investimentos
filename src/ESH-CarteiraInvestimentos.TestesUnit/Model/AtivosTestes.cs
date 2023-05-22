@@ -63,16 +63,15 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
             ativo.Aportes = new List<Aporte>();
 
             var novoAporte = new Aporte();
-            novoAporte.QtdCompra = 10;
+            novoAporte.QtdCotas = 10;
             novoAporte.DtCompra = DateTime.Now;
-            novoAporte.VlCompra = 56.60m;
-            
+            novoAporte.VlUnitario = 56.60m;
 
             ativo.AddAporte(novoAporte);
 
             Assert.True(ativo.Aportes.Count.Equals(1));
             Assert.True(ativo.PrecoMedio.Equals(56.60m));
-            Assert.True(ativo.TotalInvestido.Equals( decimal.Multiply(10, 56.60m)));
+            Assert.True(ativo.TotalInvestido.Equals(novoAporte.CalculaTotalAporte()));
             
         }
 
@@ -80,19 +79,18 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         public void Teste4()
         {
             var ativo = new Ativo();
-            ativo.Proventos = new List<Provento>();
-            ativo.TotalProventos = 100.00m;
+            ativo.Proventos = new List<Provento>();            
 
-            var novoProveto = new Provento();
-            novoProveto.Data = DateTime.Now;
-            novoProveto.VlUnProvento = 0.87m;
-            novoProveto.QtdCotas = 100;
-            novoProveto.CalculaTotalProvento();
+            var novoProvento = new Provento();
+            novoProvento.Data = DateTime.Now;
+            novoProvento.VlUnitario = 0.87m;
+            novoProvento.QtdCotas = 100;
+            
 
-            ativo.AddProvento(novoProveto);
+            ativo.AddProvento(novoProvento);
 
             Assert.True(ativo.Proventos.Count.Equals(1));
-            Assert.True(ativo.TotalProventos.Equals(187.00m));
+            Assert.True(ativo.TotalProventos.Equals(novoProvento.CalculaTotalProvento()));
         }
 
 

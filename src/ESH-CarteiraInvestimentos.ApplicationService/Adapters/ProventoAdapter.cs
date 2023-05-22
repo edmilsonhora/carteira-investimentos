@@ -30,7 +30,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 AtivoId = item.AtivoId,
                 Data = item.Data,
                 QtdCotas = item.QtdCotas,
-                VlUnProvento = item.VlUnProvento
+                VlUnProvento = item.VlUnitario
             };
         }
     }

@@ -43,8 +43,8 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
             var aporte = new Aporte();
             aporte.AtivoId = view.AtivoId;
             aporte.DtCompra = view.DtCompra;
-            aporte.VlCompra = view.VlCompra;
-            aporte.QtdCompra = view.QtdCompra;
+            aporte.VlUnitario = view.VlCompra;
+            aporte.QtdCotas = view.QtdCompra;
 
             aporte.Validar();
 

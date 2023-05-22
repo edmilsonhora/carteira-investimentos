@@ -43,13 +43,11 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
         {
             var novoProvento = new Provento();
             novoProvento.AtivoId = view.AtivoId;
-            novoProvento.VlUnProvento = view.VlUnProvento;
+            novoProvento.VlUnitario = view.VlUnProvento;
             novoProvento.Data = view.Data;
             novoProvento.QtdCotas = view.QtdCotas;
 
             novoProvento.Validar();
-
-            novoProvento.CalculaTotalProvento();
 
             var ativo = _repository.Ativos.ObterPor(view.AtivoId);
             ativo.AddProvento(novoProvento);
