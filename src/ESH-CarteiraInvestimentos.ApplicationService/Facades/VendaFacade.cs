@@ -42,8 +42,8 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
         {
             var venda = new Venda();
             venda.DtVenda = view.DtVenda;
-            venda.QtdVenda = view.QtdVenda;
-            venda.VlVenda = view.VlVenda;
+            venda.QtdCotas = view.QtdVenda;
+            venda.VlUnitario = view.VlVenda;
             venda.AtivoId = view.AtivoId;
 
             venda.Validar();

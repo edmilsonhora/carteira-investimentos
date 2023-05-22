@@ -12,21 +12,23 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public int AtivoId { get; set; }
         public DateTime Data { get; set; }
         public int QtdCotas { get; set; }
-        public decimal VlUnProvento { get; set; }
-        public decimal VlTotalProvento { get; set; }
+        public decimal VlUnitario { get; set; }
+        
         public override void Validar()
         {
             CampoNumericoObrigatorio("AtivoId", AtivoId);
             CampoDataObrigatorio("Data", Data);
             CampoNumericoObrigatorio("QtdCotas", QtdCotas);
-            CampoNumericoObrigatorio("VlUnProvento", VlUnProvento);
+            CampoNumericoObrigatorio("VlProvento", VlUnitario);
 
             base.Validar();
         }
-        public void CalculaTotalProvento()
+
+        public decimal CalculaTotalProvento()
         {
-            VlTotalProvento = decimal.Multiply(VlUnProvento, QtdCotas);
+            return decimal.Multiply(VlUnitario, QtdCotas);
         }
+       
     }
 
     public interface IProventoRepository : IRepositoryBase<Provento> { }

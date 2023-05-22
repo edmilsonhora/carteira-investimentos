@@ -28,8 +28,8 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 Id = item.Id,
                 AtivoId = item.AtivoId,
                 DtCompra = item.DtCompra,
-                QtdCompra = item.QtdCompra,
-                VlCompra = item.VlCompra
+                QtdCompra = item.QtdCotas,
+                VlCompra = item.VlUnitario
             };
         }
     }

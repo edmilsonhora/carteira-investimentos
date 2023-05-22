@@ -10,17 +10,22 @@ namespace ESH_CarteiraInvestimentos.DomainModel
     {
         public Ativo Ativo { get; set; }
         public int AtivoId { get; set; }
-        public int QtdVenda { get; set; }
+        public int QtdCotas { get; set; }
         public DateTime DtVenda { get; set; }
-        public decimal VlVenda { get; set; }
+        public decimal VlUnitario { get; set; }
 
         public override void Validar()
         {
             CampoNumericoObrigatorio("AtivoId", AtivoId);
-            CampoNumericoObrigatorio("Quantidade", QtdVenda);
+            CampoNumericoObrigatorio("QtdCotas", QtdCotas);
             CampoDataObrigatorio("DtVenda", DtVenda);
-            CampoNumericoObrigatorio("VlVenda", VlVenda);
+            CampoNumericoObrigatorio("VlUnitario", VlUnitario);
             base.Validar();
+        }
+
+        public decimal CalculaTotalVenda()
+        {
+            return decimal.Multiply(VlUnitario, QtdCotas);
         }
     }
 

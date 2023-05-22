@@ -41,8 +41,8 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         {
             Aportes.Add(aporte);
             PrecoMedio = CalcularPrecoMedio();
-            TotalInvestido += decimal.Multiply(aporte.VlCompra, aporte.QtdCompra);
-            QtdTotal += aporte.QtdCompra;
+            TotalInvestido += aporte.CalculaTotalAporte();
+            QtdTotal += aporte.QtdCotas;
             CalculaSaldoAtual();
         }
 
@@ -50,8 +50,8 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         {
             Aportes.Remove(aporte);
             PrecoMedio = CalcularPrecoMedio();
-            TotalInvestido -= decimal.Multiply(aporte.VlCompra, aporte.QtdCompra);
-            QtdTotal -= aporte.QtdCompra;
+            TotalInvestido -= aporte.CalculaTotalAporte();
+            QtdTotal -= aporte.QtdCotas;
             CalculaSaldoAtual() ;
         }
 
@@ -62,8 +62,8 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
             foreach (var item in Aportes)
             {
-                precoPonderado += decimal.Multiply(item.VlCompra, item.QtdCompra);
-                quantidades += item.QtdCompra;
+                precoPonderado += item.CalculaTotalAporte();
+                quantidades += item.QtdCotas;
             }
 
             if(quantidades == 0) { return 0; }
@@ -74,23 +74,23 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public void AddProvento(Provento provento)
         {
             Proventos.Add(provento);
-            TotalProventos += provento.VlTotalProvento;
+            TotalProventos += provento.CalculaTotalProvento();
         }
 
         public void RemoveProvento(Provento provento)
         {
             Proventos.Remove(provento);
-            TotalProventos -= provento.VlTotalProvento;
+            TotalProventos -= provento.CalculaTotalProvento();
         }
 
         public void AddVenda(Venda venda)
         {
-            if (venda.QtdVenda > QtdTotal)
+            if (venda.QtdCotas > QtdTotal)
                 throw new ApplicationException("Quantidade de venda maior que o Total.");
 
             Vendas.Add(venda);
-            TotalResgatado += decimal.Multiply(venda.VlVenda, venda.QtdVenda);
-            QtdTotal -= venda.QtdVenda;
+            TotalResgatado += venda.CalculaTotalVenda();
+            QtdTotal -= venda.QtdCotas;
             CalculaSaldoAtual();
             if (QtdTotal == 0)
             {
@@ -102,8 +102,8 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public void RemoveVenda(Venda venda)
         {
             Vendas.Remove(venda);
-            TotalResgatado -= decimal.Multiply(venda.VlVenda, venda.QtdVenda);
-            QtdTotal += venda.QtdVenda;
+            TotalResgatado -= venda.CalculaTotalVenda();
+            QtdTotal += venda.QtdCotas;
             CalculaSaldoAtual();
         }
 
