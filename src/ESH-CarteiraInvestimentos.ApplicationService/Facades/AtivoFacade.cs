@@ -36,14 +36,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
         }
         public void Salvar(AtivoView view)
         {
-            var obj = view.Id == 0 ? new Ativo() : _repository.Ativos.ObterPor(view.Id);
-            obj.CNPJ = view.CNPJ;
-            obj.Ticker = view.Ticker;
-            obj.Tipo = view.Tipo;
-            obj.Repository = _repository;
-            obj.Validar();
-
-            _repository.Ativos.Salvar(obj);
+            throw new NotImplementedException();
         }
 
         public void Salvar(AtivoInclusaoView view)
@@ -63,6 +56,24 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
             aporte.Validar();
 
             obj.Aportes.Add(aporte);
+
+            _repository.Ativos.Salvar(obj);
+        }
+
+        public void Salvar(AtivoAtualizacaoView view)
+        {
+            var obj = _repository.Ativos.ObterPor(view.Id);
+
+            if(obj is null)
+            {
+                throw new ApplicationException("Ativo não encontrado.");
+            }
+
+            obj.CNPJ = view.CNPJ;
+            obj.Ticker = view.Ticker;
+            obj.Tipo = view.Tipo;
+            obj.Repository = _repository;
+            obj.Validar();
 
             _repository.Ativos.Salvar(obj);
         }

@@ -33,7 +33,7 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
 
         public decimal ObterSaldoTotalInvestido()
         {
-            return _contexto.Ativos.Sum(p => p.SaldoAtual);
+            return _contexto.Ativos.Where(p => p.EhAtivo).Sum(p => p.SaldoAtual);
         }
 
         public new List<Ativo> ObterTodos()

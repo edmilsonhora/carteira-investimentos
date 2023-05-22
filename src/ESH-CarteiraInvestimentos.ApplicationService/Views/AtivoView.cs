@@ -24,7 +24,8 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Views
 
     public interface IAtivoFacade : IFacadeBase<AtivoView>
     {
-       void Salvar(AtivoInclusaoView view);
+        void Salvar(AtivoInclusaoView view);
+        void Salvar(AtivoAtualizacaoView view);
     }
 
 }

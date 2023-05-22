@@ -11,6 +11,12 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Contexts
 {
     public class MyContext : DbContext
     {
+
+        public MyContext()
+        {
+            Database.EnsureCreated();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=DBb3;Integrated Security=True");

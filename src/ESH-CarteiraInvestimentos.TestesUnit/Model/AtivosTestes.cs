@@ -80,17 +80,19 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         public void Teste4()
         {
             var ativo = new Ativo();
-            ativo.Aportes = new List<Aporte>();
+            ativo.Proventos = new List<Provento>();
+            ativo.TotalProventos = 100.00m;
 
-            var novoAporte = new Aporte();
-            novoAporte.QtdCompra = 10;
-            novoAporte.DtCompra = DateTime.Now;
-            novoAporte.VlCompra = 56.60m;
+            var novoProveto = new Provento();
+            novoProveto.Data = DateTime.Now;
+            novoProveto.VlUnProvento = 0.87m;
+            novoProveto.QtdCotas = 100;
+            novoProveto.CalculaTotalProvento();
 
-            ativo.AddAporte(novoAporte);
+            ativo.AddProvento(novoProveto);
 
-            Assert.True(ativo.Aportes.Count.Equals(1));
-            Assert.True(ativo.PrecoMedio.Equals(56.60m));
+            Assert.True(ativo.Proventos.Count.Equals(1));
+            Assert.True(ativo.TotalProventos.Equals(187.00m));
         }
 
 
