@@ -25,7 +25,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         }
         public void CalculaTotalProvento()
         {
-            VlTotalProvento = (VlUnProvento * QtdCotas);
+            VlTotalProvento = decimal.Multiply(VlUnProvento, QtdCotas);
         }
     }
 

@@ -1,7 +1,12 @@
 ﻿using ESH_CarteiraInvestimentos.ApplicationService;
 using ESH_CarteiraInvestimentos.ApplicationService.Views;
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
+using System.Collections.Generic;
 
 namespace ESH_CarteiraInvestimentos.API.Controllers
 {
@@ -18,7 +23,10 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
 
         [HttpPost]
         [Route("atualizar")]
-        public IActionResult Atualizar(AtivoView ativo)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Atualizar(AtivoAtualizacaoView ativo)
         {
             try
             {
@@ -34,6 +42,9 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
 
         [HttpPost]
         [Route("incluir")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Incluir(AtivoInclusaoView ativo)
         {
             try
@@ -50,6 +61,9 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
 
         [HttpGet]
         [Route("obterTodos")]
+        [ProducesResponseType(typeof(List<AtivoView>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ObterTodos()
         {
             try

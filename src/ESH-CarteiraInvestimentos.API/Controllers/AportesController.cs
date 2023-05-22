@@ -19,6 +19,9 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
 
         [HttpPost]
         [Route("salvar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Salvar(AporteView aporte)
         {
             try
@@ -36,6 +39,9 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
 
         [HttpDelete]
         [Route("excluir/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Excluir(int id)
         {
             try
