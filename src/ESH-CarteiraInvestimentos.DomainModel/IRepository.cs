@@ -12,6 +12,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         IAporteRepository Aportes { get; }
         IProventoRepository Proventos { get; }
         IVendaRepository Vendas { get; }
+        ICotacaoRepository Cotacoes { get; }
 
         void SaveChanges();
         void Rollback();

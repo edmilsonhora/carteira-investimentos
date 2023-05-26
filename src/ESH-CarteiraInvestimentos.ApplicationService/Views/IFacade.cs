@@ -12,6 +12,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Views
         IAporteFacade Aportes { get; }
         IProventoFacade Proventos { get; }
         IVendaFacade Vendas { get; }
+        ICotacaoFacade Cotacoes { get; }
         void SaveChanges();
         void Rollback();
     }

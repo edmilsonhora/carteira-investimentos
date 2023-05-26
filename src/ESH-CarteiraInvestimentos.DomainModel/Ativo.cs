@@ -19,9 +19,13 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public decimal TotalResgatado { get; set; }
         public decimal SaldoAtual { get; set; }
         public  bool EhAtivo { get; set; }
+        public decimal CotacaoAtual { get; set; }
+        public decimal GanhoPerda { get; set; }
         public List<Aporte> Aportes { get; set; }
         public List<Provento> Proventos { get; set; }
         public List<Venda> Vendas { get; set; }
+        public List<Cotacao> Cotacoes { get; set; }
+
         [NotMapped]
         public IRepository Repository { get; set; }            
 
@@ -44,6 +48,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             TotalInvestido += aporte.CalculaTotalAporte();
             QtdTotal += aporte.QtdCotas;
             CalculaSaldoAtual();
+            CalculaGanhoPerda();
         }
 
         public void RemoveAporte(Aporte aporte)
@@ -52,7 +57,8 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             PrecoMedio = CalcularPrecoMedio();
             TotalInvestido -= aporte.CalculaTotalAporte();
             QtdTotal -= aporte.QtdCotas;
-            CalculaSaldoAtual() ;
+            CalculaSaldoAtual();
+            CalculaGanhoPerda();
         }
 
         private decimal CalcularPrecoMedio()
@@ -90,6 +96,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             TotalResgatado += venda.CalculaTotalVenda();
             QtdTotal -= venda.QtdCotas;
             CalculaSaldoAtual();
+            CalculaGanhoPerda();
             if (QtdTotal == 0)
             {
                 PrecoMedio = 0;
@@ -103,6 +110,14 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             TotalResgatado -= venda.CalculaTotalVenda();
             QtdTotal += venda.QtdCotas;
             CalculaSaldoAtual();
+            CalculaGanhoPerda();
+        }
+
+        public void AddCotacao(Cotacao cotacao)
+        {
+            Cotacoes.Add(cotacao);
+            CotacaoAtual = cotacao.Preco;
+            CalculaGanhoPerda();
         }
 
         public decimal CalculaPercentualNaCarteira(decimal totalInvestido)
@@ -113,6 +128,11 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         private void CalculaSaldoAtual()
         {
             SaldoAtual = decimal.Subtract(TotalInvestido, TotalResgatado);
+        }
+
+        private void CalculaGanhoPerda()
+        {
+            GanhoPerda = decimal.Subtract(decimal.Multiply(CotacaoAtual, QtdTotal), decimal.Multiply(PrecoMedio, QtdTotal));
         }
     }
 
