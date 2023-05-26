@@ -12,7 +12,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public string Ticker { get; set; }
         public string CNPJ { get; set; }
         public TipoAtivo Tipo { get; set; }
-        public int QtdTotal { get; set; }
+        public int QtdCotas { get; set; }
         public decimal TotalInvestido { get; set; }
         public decimal PrecoMedio { get; set; }
         public decimal TotalProventos { get; set; }
@@ -46,7 +46,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             Aportes.Add(aporte);
             PrecoMedio = CalcularPrecoMedio();
             TotalInvestido += aporte.CalculaTotalAporte();
-            QtdTotal += aporte.QtdCotas;
+            QtdCotas += aporte.QtdCotas;
             CalculaSaldoAtual();
             CalculaGanhoPerda();
         }
@@ -56,26 +56,10 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             Aportes.Remove(aporte);
             PrecoMedio = CalcularPrecoMedio();
             TotalInvestido -= aporte.CalculaTotalAporte();
-            QtdTotal -= aporte.QtdCotas;
+            QtdCotas -= aporte.QtdCotas;
             CalculaSaldoAtual();
             CalculaGanhoPerda();
-        }
-
-        private decimal CalcularPrecoMedio()
-        {           
-            decimal precoPonderado = 0;
-            int quantidades = 0;
-
-            foreach (var item in Aportes)
-            {
-                precoPonderado += item.CalculaTotalAporte();
-                quantidades += item.QtdCotas;
-            }
-
-            if(quantidades == 0) { return 0; }
-
-            return (precoPonderado / quantidades);
-        }
+        }        
 
         public void AddProvento(Provento provento)
         {
@@ -91,13 +75,13 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
         public void AddVenda(Venda venda)
         {
-            venda.ValidaSePodeSerRealizada(QtdTotal);
+            venda.ValidaSePodeSerRealizada(QtdCotas);
             Vendas.Add(venda);
             TotalResgatado += venda.CalculaTotalVenda();
-            QtdTotal -= venda.QtdCotas;
+            QtdCotas -= venda.QtdCotas;
             CalculaSaldoAtual();
             CalculaGanhoPerda();
-            if (QtdTotal == 0)
+            if (QtdCotas == 0)
             {
                 PrecoMedio = 0;
                 EhAtivo = false;
@@ -108,7 +92,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         {
             Vendas.Remove(venda);
             TotalResgatado -= venda.CalculaTotalVenda();
-            QtdTotal += venda.QtdCotas;
+            QtdCotas += venda.QtdCotas;
             CalculaSaldoAtual();
             CalculaGanhoPerda();
         }
@@ -125,6 +109,24 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             return decimal.Divide(SaldoAtual, totalInvestido);
         }
 
+        #region metodosPrivados
+
+        private decimal CalcularPrecoMedio()
+        {
+            decimal precoPonderado = 0;
+            int quantidades = 0;
+
+            foreach (var item in Aportes)
+            {
+                precoPonderado += item.CalculaTotalAporte();
+                quantidades += item.QtdCotas;
+            }
+
+            if (quantidades == 0) { return 0; }
+
+            return (precoPonderado / quantidades);
+        }
+
         private void CalculaSaldoAtual()
         {
             SaldoAtual = decimal.Subtract(TotalInvestido, TotalResgatado);
@@ -132,8 +134,10 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
         private void CalculaGanhoPerda()
         {
-            GanhoPerda = decimal.Subtract(decimal.Multiply(CotacaoAtual, QtdTotal), decimal.Multiply(PrecoMedio, QtdTotal));
+            GanhoPerda = decimal.Subtract(decimal.Multiply(CotacaoAtual, QtdCotas), decimal.Multiply(PrecoMedio, QtdCotas));
         }
+
+        #endregion
     }
 
     public interface IAtivoRepository : IRepositoryBase<Ativo>
