@@ -17,20 +17,13 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public DateTime DataInclusao { get; set; }
 
         public override void Validar()
-        {
-            //CampoNumericoObrigatorio("AtivoId", AtivoId);
+        {            
             CampoTextoObrigatorio("Ticker", Ticker);
             CampoDataObrigatorio("Data", Data);
             CampoNumericoObrigatorio("Preco", Preco);
             base.Validar();
         }
     }
-
-    //public class CotacaoDTO
-    //{
-    //    
-    //}
-
 
     public class Result
     {

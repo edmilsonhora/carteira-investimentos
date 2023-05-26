@@ -33,7 +33,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 Ticker = item.Ticker,
                 CNPJ = item.CNPJ,
                 PrecoMedio = item.PrecoMedio,
-                QtdTotal = item.QtdTotal,
+                QtdTotal = item.QtdCotas,
                 Tipo = item.Tipo,
                 TotalInvestido = item.TotalInvestido,
                 TotalProventos = item.TotalProventos,
