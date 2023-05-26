@@ -184,5 +184,24 @@ namespace ESH_CarteiraInvestimentos.Win32
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void gridAtivos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 8)
+            {
+               
+
+                if (Convert.ToDecimal(e.Value) < 0)
+                {
+                    e.CellStyle.ForeColor = Color.Red;
+                }
+                else
+                {
+                    e.CellStyle.ForeColor = Color.Green;
+                }
+
+                e.CellStyle.Format = "C";
+            }
+        }
     }
 }

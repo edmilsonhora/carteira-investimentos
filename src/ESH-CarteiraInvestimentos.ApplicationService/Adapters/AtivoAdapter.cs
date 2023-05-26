@@ -39,7 +39,8 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 TotalProventos = item.TotalProventos,
                 TotalResgatado = item.TotalResgatado,
                 SaldoAtual = item.SaldoAtual,
-                PercentualNaCarteira = item.CalculaPercentualNaCarteira(totalInvestido)
+                PercentualNaCarteira = item.CalculaPercentualNaCarteira(totalInvestido),
+                GanhaPerde = item.GanhoPerda
             };
         }
 

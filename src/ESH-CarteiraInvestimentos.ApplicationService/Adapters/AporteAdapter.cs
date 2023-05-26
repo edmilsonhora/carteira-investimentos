@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
 {
-    public static class AporteAdapter
+    internal static class AporteAdapter
     {
         public static List<AporteView> ConvertToView(this List<Aporte> list)
         {

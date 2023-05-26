@@ -2,9 +2,12 @@
 
 using ESH_CarteiraInvestimentos.ApplicationService;
 using ESH_CarteiraInvestimentos.ApplicationService.Views;
+using ESH_CarteiraInvestimentos.DataAccess.RestApis;
+using ESH_CarteiraInvestimentos.DomainModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace ESH_CarteiraInvestimentos.API
 {
