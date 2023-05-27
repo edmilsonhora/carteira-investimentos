@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
 {
@@ -23,14 +21,14 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
         public List<Cotacao> ObterUltimasCotacoes()
         {
             contador++;
-            if(contador > 3)
+            if (contador > 3)
             {
                 throw new ArgumentException("Quantidade de tentativas de atualizar cotações excedida.");
             }
 
             if (CotacoesEstaoAtualizadas())
             {
-                return _context.Cotacoes.Where(p => p.DataInclusao.Date == DateTime.Now.Date).AsNoTracking().ToList();
+                return _context.Cotacoes.Include(p => p.Ativo).Where(p => p.DataInclusao.Date == DateTime.Now.Date).AsNoTracking().ToList();
             }
             else
             {
@@ -43,7 +41,7 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
                     {
                         var novaCotacao = ObterNovaCotacao(item);
                         novaCotacao.Validar();
-                        var ativo = _context.Ativos.Include(p => p.Cotacoes).First(p => p.Ticker == novaCotacao.Ticker && p.EhAtivo);
+                        var ativo = _context.Ativos.Include(p => p.Cotacoes).First(p => p.Ticker == item.Ticker.ToUpper() && p.EhAtivo);
                         ativo.AddCotacao(novaCotacao);
                         _context.SaveChanges();
                     }
@@ -51,12 +49,11 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
                 return ObterUltimasCotacoes();
             }
         }
+
         private Cotacao ObterNovaCotacao(Result item)
         {
             return new Cotacao()
             {
-                
-                Ticker = item.Ticker.ToUpper(),
                 Data = item.Data,
                 Preco = item.Preco,
                 DataInclusao = DateTime.Now,

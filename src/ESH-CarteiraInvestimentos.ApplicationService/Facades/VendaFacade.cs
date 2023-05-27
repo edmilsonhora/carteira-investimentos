@@ -1,11 +1,7 @@
 ﻿using ESH_CarteiraInvestimentos.ApplicationService.Adapters;
 using ESH_CarteiraInvestimentos.ApplicationService.Views;
 using ESH_CarteiraInvestimentos.DomainModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
 {
@@ -20,7 +16,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
         public void Excluir(int id)
         {
             var venda = _repository.Vendas.ObterPor(id);
-            if(venda != null)
+            if (venda != null)
             {
                 var ativo = _repository.Ativos.ObterPor(id);
                 ativo.RemoveVenda(venda);

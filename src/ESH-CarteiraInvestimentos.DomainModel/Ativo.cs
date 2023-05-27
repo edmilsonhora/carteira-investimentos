@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.DomainModel
 {
@@ -18,7 +15,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public decimal TotalProventos { get; set; }
         public decimal TotalResgatado { get; set; }
         public decimal SaldoAtual { get; set; }
-        public  bool EhAtivo { get; set; }
+        public bool EhAtivo { get; set; }
         public decimal CotacaoAtual { get; set; }
         public decimal GanhoPerda { get; set; }
         public List<Aporte> Aportes { get; set; }
@@ -26,7 +23,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public List<Venda> Vendas { get; set; }
         public List<Cotacao> Cotacoes { get; set; }
         [NotMapped]
-        public IRepository Repository { get; set; }            
+        public IRepository Repository { get; set; }
 
         public override void Validar()
         {
@@ -42,7 +39,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public void AddAporte(Aporte aporte)
         {
             Aportes.Add(aporte);
-            PrecoMedio = CalcularPrecoMedio();
+            PrecoMedio = CalcularPrecoMedio(aporte);
             TotalInvestido += aporte.CalcularTotalAporte();
             QtdCotas += aporte.QtdCotas;
             CalculaSaldoAtual();
@@ -51,12 +48,12 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public void RemoveAporte(Aporte aporte)
         {
             Aportes.Remove(aporte);
-            PrecoMedio = CalcularPrecoMedio();
+            PrecoMedio = RecalcularPrecoMedio(aporte);
             TotalInvestido -= aporte.CalcularTotalAporte();
             QtdCotas -= aporte.QtdCotas;
             CalculaSaldoAtual();
             CalculaGanhoPerda();
-        }        
+        }
         public void AddProvento(Provento provento)
         {
             Proventos.Add(provento);
@@ -101,20 +98,48 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         }
         #region metodosPrivados
 
-        private decimal CalcularPrecoMedio()
-        {
-            decimal precoPonderado = 0;
-            int quantidades = 0;
+        //private decimal CalcularPrecoMedio()
+        //{
+        //    decimal precoPonderado = 0;
+        //    int quantidades = 0;
 
-            foreach (var item in Aportes)
-            {
-                precoPonderado += item.CalcularTotalAporte();
-                quantidades += item.QtdCotas;
-            }
+        //    foreach (var item in Aportes)
+        //    {
+        //        precoPonderado += item.CalcularTotalAporte();
+        //        quantidades += item.QtdCotas;
+        //    }
+
+        //    if (quantidades == 0) { return 0; }
+
+        //    return (precoPonderado / quantidades);
+        //}
+
+        private decimal CalcularPrecoMedio(Aporte aporte)
+        {
+            decimal precoPonderado = TotalInvestido;
+            int quantidades = QtdCotas;
+
+            precoPonderado += aporte.CalcularTotalAporte();
+            quantidades += aporte.QtdCotas;
 
             if (quantidades == 0) { return 0; }
 
             return (precoPonderado / quantidades);
+
+        }
+
+        private decimal RecalcularPrecoMedio(Aporte aporte)
+        {
+            decimal precoPonderado = TotalInvestido;
+            int quantidades = QtdCotas;
+
+            precoPonderado -= aporte.CalcularTotalAporte();
+            quantidades -= aporte.QtdCotas;
+
+            if (quantidades == 0) { return 0; }
+
+            return (precoPonderado / quantidades);
+
         }
 
         private void CalculaSaldoAtual()

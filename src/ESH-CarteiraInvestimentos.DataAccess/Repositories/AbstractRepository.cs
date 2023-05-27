@@ -1,11 +1,8 @@
 ﻿using ESH_CarteiraInvestimentos.DataAccess.Contexts;
 using ESH_CarteiraInvestimentos.DomainModel;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
 {
@@ -34,7 +31,7 @@ namespace ESH_CarteiraInvestimentos.DataAccess.Repositories
 
         public void Salvar(T entity)
         {
-            if(entity.Id == 0)
+            if (entity.Id == 0)
             {
                 _context.Set<T>().Add(entity);
             }

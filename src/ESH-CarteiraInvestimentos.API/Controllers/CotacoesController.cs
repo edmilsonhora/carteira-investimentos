@@ -1,5 +1,4 @@
 ﻿using ESH_CarteiraInvestimentos.ApplicationService.Views;
-using ESH_CarteiraInvestimentos.DomainModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

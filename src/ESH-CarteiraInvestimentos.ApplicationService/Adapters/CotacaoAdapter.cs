@@ -1,10 +1,6 @@
 ﻿using ESH_CarteiraInvestimentos.ApplicationService.Views;
 using ESH_CarteiraInvestimentos.DomainModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
 {
@@ -30,7 +26,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 Id = item.Id,
                 Data = item.Data,
                 Preco = item.Preco,
-                Ticker = item.Ticker,
+                Ticker = item.Ativo.Ticker,
             };
         }
 

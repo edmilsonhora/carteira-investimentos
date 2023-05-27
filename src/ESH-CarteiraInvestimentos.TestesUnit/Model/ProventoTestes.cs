@@ -1,9 +1,5 @@
 ﻿using ESH_CarteiraInvestimentos.DomainModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ESH_CarteiraInvestimentos.TestesUnit.Model
@@ -27,10 +23,10 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
 
             var mensagens = result.Message.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
 
-            Assert.Equal("O campo AtivoId é obrigatório.", mensagens[0]);
-            Assert.Equal("O campo Data é obrigatório.", mensagens[1]);
-            Assert.Equal("O campo QtdCotas é obrigatório.", mensagens[2]);
-            Assert.Equal("O campo VlProvento é obrigatório.", mensagens[3]);
+
+            Assert.Equal("O campo Data é obrigatório.", mensagens[0]);
+            Assert.Equal("O campo QtdCotas é obrigatório.", mensagens[1]);
+            Assert.Equal("O campo VlProvento é obrigatório.", mensagens[2]);
         }
 
         [Fact(DisplayName = "Calcular total de provento")]

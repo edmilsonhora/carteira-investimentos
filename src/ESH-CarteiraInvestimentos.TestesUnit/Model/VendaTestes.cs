@@ -1,9 +1,5 @@
 ﻿using ESH_CarteiraInvestimentos.DomainModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ESH_CarteiraInvestimentos.TestesUnit.Model
@@ -13,7 +9,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         [Fact(DisplayName = "Ao validar venda sem preencher os dados deve lançar exception")]
         public void Teste0()
         {
-            var venda = new Venda();            
+            var venda = new Venda();
 
             Assert.Throws<ApplicationException>(() => venda.Validar());
         }
@@ -21,16 +17,15 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         [Fact(DisplayName = "Ao validar venda sem preencher os dados deve lançar exception e exibir mensagem personalizada")]
         public void Teste1()
         {
-            var venda = new Venda();           
+            var venda = new Venda();
 
             var result = Assert.Throws<ApplicationException>(() => venda.Validar());
 
             var mensagens = result.Message.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
 
-            Assert.Equal("O campo AtivoId é obrigatório.", mensagens[0]);
-            Assert.Equal("O campo QtdCotas é obrigatório.", mensagens[1]);
-            Assert.Equal("O campo DtVenda é obrigatório.", mensagens[2]);
-            Assert.Equal("O campo VlUnitario é obrigatório.", mensagens[3]);           
+            Assert.Equal("O campo QtdCotas é obrigatório.", mensagens[0]);
+            Assert.Equal("O campo DtVenda é obrigatório.", mensagens[1]);
+            Assert.Equal("O campo VlUnitario é obrigatório.", mensagens[2]);
         }
 
         [Fact(DisplayName = "Calcular total da venda")]

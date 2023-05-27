@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="7.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ESH-CarteiraInvestimentos.ApplicationService\ESH-CarteiraInvestimentos.ApplicationService.csproj" />
   </ItemGroup>
 
