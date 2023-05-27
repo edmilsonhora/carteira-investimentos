@@ -1,6 +1,4 @@
-﻿
-using ESH_CarteiraInvestimentos.ApplicationService;
-using ESH_CarteiraInvestimentos.ApplicationService.Views;
+﻿using ESH_CarteiraInvestimentos.ApplicationService.Views;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -33,7 +31,7 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message.Replace(Environment.NewLine, ";"));
-                 
+
             }
         }
 

@@ -1,5 +1,4 @@
-﻿using ESH_CarteiraInvestimentos.ApplicationService;
-using ESH_CarteiraInvestimentos.ApplicationService.Views;
+﻿using ESH_CarteiraInvestimentos.ApplicationService.Views;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

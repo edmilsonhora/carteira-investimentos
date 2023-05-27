@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.DomainModel
 {
@@ -12,14 +9,14 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public int Id { get; set; }
         protected void CampoTextoObrigatorio(string nome, string valor)
         {
-            if(string.IsNullOrWhiteSpace(valor))
+            if (string.IsNullOrWhiteSpace(valor))
             {
                 RegrasQuebradas.Append($"O campo {nome} é obrigatório.{Environment.NewLine}");
             }
         }
         protected void CampoNumericoObrigatorio(string nome, decimal valor)
         {
-            if(valor <= 0)
+            if (valor <= 0)
             {
                 RegrasQuebradas.Append($"O campo {nome} é obrigatório.{Environment.NewLine}");
             }
@@ -33,7 +30,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         }
         protected void CampoDataObrigatorio(string nome, DateTime valor)
         {
-            if(valor == DateTime.MinValue)
+            if (valor == DateTime.MinValue)
             {
                 RegrasQuebradas.Append($"O campo {nome} é obrigatório.{Environment.NewLine}");
             }
@@ -47,7 +44,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         }
         public virtual void Validar()
         {
-            if(RegrasQuebradas.Length > 0)
+            if (RegrasQuebradas.Length > 0)
                 throw new ApplicationException(RegrasQuebradas.ToString());
         }
     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ESH_CarteiraInvestimentos.DomainModel
+﻿namespace ESH_CarteiraInvestimentos.DomainModel
 {
     public interface IRepository
     {

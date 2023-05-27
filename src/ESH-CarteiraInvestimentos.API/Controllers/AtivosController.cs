@@ -1,10 +1,6 @@
-﻿using ESH_CarteiraInvestimentos.ApplicationService;
-using ESH_CarteiraInvestimentos.ApplicationService.Views;
-using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+﻿using ESH_CarteiraInvestimentos.ApplicationService.Views;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 
@@ -36,7 +32,7 @@ namespace ESH_CarteiraInvestimentos.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message.Replace(Environment.NewLine,";"));                
+                return BadRequest(ex.Message.Replace(Environment.NewLine, ";"));
             }
         }
 

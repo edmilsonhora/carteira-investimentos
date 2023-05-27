@@ -1,10 +1,6 @@
 ﻿using ESH_CarteiraInvestimentos.ApplicationService.Views;
 using ESH_CarteiraInvestimentos.DomainModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
 {
@@ -14,9 +10,10 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
         {
             var novaLista = new List<VendaView>();
 
-            foreach (var item in list) {
+            foreach (var item in list)
+            {
 
-                novaLista.Add(item.ConvertToView());           
+                novaLista.Add(item.ConvertToView());
             }
 
             return novaLista;

@@ -1,24 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.DomainModel
 {
-    public class Cotacao: EntityBase
+    public class Cotacao : EntityBase
     {
         public Ativo Ativo { get; set; }
         public int AtivoId { get; set; }
-        public string Ticker { get; set; }
         public Decimal Preco { get; set; }
         public DateTime Data { get; set; }
         public DateTime DataInclusao { get; set; }
 
         public override void Validar()
-        {            
-            CampoTextoObrigatorio("Ticker", Ticker);
+        {
             CampoDataObrigatorio("Data", Data);
             CampoNumericoObrigatorio("Preco", Preco);
             base.Validar();
@@ -41,12 +36,13 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public DateTime requestedAt { get; set; }
     }
 
-    public interface ICotacaoRepository : IRepositoryBase<Cotacao> {
+    public interface ICotacaoRepository : IRepositoryBase<Cotacao>
+    {
 
         List<Cotacao> ObterUltimasCotacoes();
     }
 
-    public  interface ICotacaoApi
+    public interface ICotacaoApi
     {
         CotacaoDTO ObterCotacoes(string tikers);
     }

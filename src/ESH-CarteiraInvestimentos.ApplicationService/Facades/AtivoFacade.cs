@@ -3,9 +3,6 @@ using ESH_CarteiraInvestimentos.ApplicationService.Views;
 using ESH_CarteiraInvestimentos.DomainModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
 {
@@ -19,7 +16,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
         public void Excluir(int id)
         {
             var obj = _repository.Ativos.ObterPor(id);
-            if(obj != null)
+            if (obj != null)
             {
                 _repository.Ativos.Excluir(obj);
             }
@@ -49,7 +46,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
             obj.Aportes = new List<Aporte>();
             obj.Validar();
 
-            var aporte = new Aporte();            
+            var aporte = new Aporte();
             aporte.DtCompra = view.DtCompra;
             aporte.VlUnitario = view.VlCompra;
             aporte.QtdCotas = view.QtdCompra;
@@ -64,7 +61,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
         {
             var obj = _repository.Ativos.ObterPor(view.Id);
 
-            if(obj is null)
+            if (obj is null)
             {
                 throw new ApplicationException("Ativo não encontrado.");
             }

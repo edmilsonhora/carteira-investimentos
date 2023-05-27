@@ -2,9 +2,6 @@
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ESH_CarteiraInvestimentos.TestesUnit.Model
@@ -164,12 +161,12 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
             var aporte1 = new Aporte();
             aporte1.QtdCotas = 10;
             aporte1.VlUnitario = 60.00m;
-            ativo.AddAporte(aporte1);           
+            ativo.AddAporte(aporte1);
 
             var aporte2 = new Aporte();
             aporte2.QtdCotas = 10;
             aporte2.VlUnitario = 50.00m;
-            ativo.AddAporte(aporte2);            
+            ativo.AddAporte(aporte2);
 
             ativo.RemoveAporte(aporte2);
 
@@ -207,7 +204,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         [Fact(DisplayName = "Ao remover uma venda deve calcular qtdCotas, totalResgatado e ganhoPerda")]
         public void Teste11()
         {
-            var ativo = ObterAtivoComValores();            
+            var ativo = ObterAtivoComValores();
             ativo.Vendas = new List<Venda>();
 
             var venda1 = new Venda();
