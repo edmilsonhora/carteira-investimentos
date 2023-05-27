@@ -12,8 +12,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public int AtivoId { get; set; }
         public DateTime Data { get; set; }
         public int QtdCotas { get; set; }
-        public decimal VlUnitario { get; set; }
-        
+        public decimal VlUnitario { get; set; }        
         public override void Validar()
         {
             CampoNumericoObrigatorio("AtivoId", AtivoId);
@@ -23,12 +22,10 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
             base.Validar();
         }
-
-        public decimal CalculaTotalProvento()
+        public decimal CalcularTotalProvento()
         {
             return decimal.Multiply(VlUnitario, QtdCotas);
-        }
-       
+        }       
     }
 
     public interface IProventoRepository : IRepositoryBase<Provento> { }

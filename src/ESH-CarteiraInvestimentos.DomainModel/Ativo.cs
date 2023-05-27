@@ -11,7 +11,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
     {
         public string Ticker { get; set; }
         public string CNPJ { get; set; }
-        public TipoAtivo Tipo { get; set; }
+        public Tipo Tipo { get; set; }
         public int QtdCotas { get; set; }
         public decimal TotalInvestido { get; set; }
         public decimal PrecoMedio { get; set; }
@@ -25,7 +25,6 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public List<Provento> Proventos { get; set; }
         public List<Venda> Vendas { get; set; }
         public List<Cotacao> Cotacoes { get; set; }
-
         [NotMapped]
         public IRepository Repository { get; set; }            
 
@@ -40,44 +39,39 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
             base.Validar();
         }
-
         public void AddAporte(Aporte aporte)
         {
             Aportes.Add(aporte);
             PrecoMedio = CalcularPrecoMedio();
-            TotalInvestido += aporte.CalculaTotalAporte();
+            TotalInvestido += aporte.CalcularTotalAporte();
             QtdCotas += aporte.QtdCotas;
             CalculaSaldoAtual();
             CalculaGanhoPerda();
         }
-
         public void RemoveAporte(Aporte aporte)
         {
             Aportes.Remove(aporte);
             PrecoMedio = CalcularPrecoMedio();
-            TotalInvestido -= aporte.CalculaTotalAporte();
+            TotalInvestido -= aporte.CalcularTotalAporte();
             QtdCotas -= aporte.QtdCotas;
             CalculaSaldoAtual();
             CalculaGanhoPerda();
         }        
-
         public void AddProvento(Provento provento)
         {
             Proventos.Add(provento);
-            TotalProventos += provento.CalculaTotalProvento();
+            TotalProventos += provento.CalcularTotalProvento();
         }
-
         public void RemoveProvento(Provento provento)
         {
             Proventos.Remove(provento);
-            TotalProventos -= provento.CalculaTotalProvento();
+            TotalProventos -= provento.CalcularTotalProvento();
         }
-
         public void AddVenda(Venda venda)
         {
             venda.ValidaSePodeSerRealizada(QtdCotas);
             Vendas.Add(venda);
-            TotalResgatado += venda.CalculaTotalVenda();
+            TotalResgatado += venda.CalcularTotalVenda();
             QtdCotas -= venda.QtdCotas;
             CalculaSaldoAtual();
             CalculaGanhoPerda();
@@ -87,28 +81,24 @@ namespace ESH_CarteiraInvestimentos.DomainModel
                 EhAtivo = false;
             }
         }
-
         public void RemoveVenda(Venda venda)
         {
             Vendas.Remove(venda);
-            TotalResgatado -= venda.CalculaTotalVenda();
+            TotalResgatado -= venda.CalcularTotalVenda();
             QtdCotas += venda.QtdCotas;
             CalculaSaldoAtual();
             CalculaGanhoPerda();
         }
-
         public void AddCotacao(Cotacao cotacao)
         {
             Cotacoes.Add(cotacao);
             CotacaoAtual = cotacao.Preco;
             CalculaGanhoPerda();
         }
-
         public decimal CalculaPercentualNaCarteira(decimal totalInvestido)
         {
             return decimal.Divide(SaldoAtual, totalInvestido);
         }
-
         #region metodosPrivados
 
         private decimal CalcularPrecoMedio()
@@ -118,7 +108,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
             foreach (var item in Aportes)
             {
-                precoPonderado += item.CalculaTotalAporte();
+                precoPonderado += item.CalcularTotalAporte();
                 quantidades += item.QtdCotas;
             }
 

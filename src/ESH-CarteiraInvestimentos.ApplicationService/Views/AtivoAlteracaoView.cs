@@ -12,6 +12,6 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Views
         public int Id { get; set; }
         public string Ticker { get; set; }
         public string CNPJ { get; set; }
-        public TipoAtivo Tipo { get; set; }
+        public Tipo Tipo { get; set; }
     }
 }

@@ -19,13 +19,12 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public override void Validar()
         {
             CampoNumericoObrigatorio("AtivoId", AtivoId);
-            CampoNumericoObrigatorio("Quantidade", QtdCotas);
+            CampoNumericoObrigatorio("QtdCotas", QtdCotas);
             CampoDataObrigatorio("DtCompra", DtCompra);
             CampoNumericoObrigatorio("VlCompra", VlUnitario);
             base.Validar();
         }
-
-        public decimal CalculaTotalAporte()
+        public decimal CalcularTotalAporte()
         {
             return decimal.Multiply(VlUnitario, QtdCotas);
         }

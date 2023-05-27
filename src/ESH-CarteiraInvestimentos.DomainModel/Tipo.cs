@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESH_CarteiraInvestimentos.DomainModel
 {
-    public enum TipoAtivo
+    public enum Tipo
     {
        FII = 1
     }

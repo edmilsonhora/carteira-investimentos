@@ -41,8 +41,6 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public DateTime requestedAt { get; set; }
     }
 
-
-
     public interface ICotacaoRepository : IRepositoryBase<Cotacao> {
 
         List<Cotacao> ObterUltimasCotacoes();

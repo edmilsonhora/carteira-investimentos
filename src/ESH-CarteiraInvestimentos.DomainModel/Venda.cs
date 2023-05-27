@@ -22,17 +22,15 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             CampoNumericoObrigatorio("VlUnitario", VlUnitario);
             base.Validar();
         }
-
-        public decimal CalculaTotalVenda()
+        public decimal CalcularTotalVenda()
         {
             return decimal.Multiply(VlUnitario, QtdCotas);
         }
-
-        public void ValidaSePodeSerRealizada(int qtdTotal)
+        public void ValidaSePodeSerRealizada(int ativoQtdCotas)
         {
-            if (QtdCotas > qtdTotal)
+            if (QtdCotas > ativoQtdCotas)
             {
-                throw new ApplicationException("Quantidade de venda maior que o Total.");
+                throw new ApplicationException("Quantidade de venda maior que o total de cotas do ativo.");
             }
         }
     }

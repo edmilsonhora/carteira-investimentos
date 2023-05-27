@@ -10,7 +10,6 @@ namespace ESH_CarteiraInvestimentos.DomainModel
     {
         protected StringBuilder RegrasQuebradas = new StringBuilder();
         public int Id { get; set; }
-
         protected void CampoTextoObrigatorio(string nome, string valor)
         {
             if(string.IsNullOrWhiteSpace(valor))
@@ -25,7 +24,6 @@ namespace ESH_CarteiraInvestimentos.DomainModel
                 RegrasQuebradas.Append($"O campo {nome} é obrigatório.{Environment.NewLine}");
             }
         }
-
         protected void CampoNumericoObrigatorio(string nome, int valor)
         {
             if (valor <= 0)
@@ -33,7 +31,6 @@ namespace ESH_CarteiraInvestimentos.DomainModel
                 RegrasQuebradas.Append($"O campo {nome} é obrigatório.{Environment.NewLine}");
             }
         }
-
         protected void CampoDataObrigatorio(string nome, DateTime valor)
         {
             if(valor == DateTime.MinValue)
@@ -41,7 +38,6 @@ namespace ESH_CarteiraInvestimentos.DomainModel
                 RegrasQuebradas.Append($"O campo {nome} é obrigatório.{Environment.NewLine}");
             }
         }
-
         protected void CampoDataObrigatorio(string nome, DateOnly valor)
         {
             if (valor == DateOnly.MinValue)
@@ -49,7 +45,6 @@ namespace ESH_CarteiraInvestimentos.DomainModel
                 RegrasQuebradas.Append($"O campo {nome} é obrigatório.{Environment.NewLine}");
             }
         }
-
         public virtual void Validar()
         {
             if(RegrasQuebradas.Length > 0)
