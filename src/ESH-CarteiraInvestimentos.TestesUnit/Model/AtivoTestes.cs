@@ -9,7 +9,7 @@ using Xunit;
 
 namespace ESH_CarteiraInvestimentos.TestesUnit.Model
 {
-    public class AtivosTestes
+    public class AtivoTestes
     {
         [Fact(DisplayName = "Ao validar ativo sem preencher os dados deve lançar exception")]
         public void Teste0()
@@ -71,7 +71,8 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
 
             Assert.True(ativo.Aportes.Count.Equals(1));
             Assert.True(ativo.PrecoMedio.Equals(56.60m));
-            Assert.True(ativo.TotalInvestido.Equals(novoAporte.CalculaTotalAporte()));
+            Assert.True(ativo.TotalInvestido.Equals(novoAporte.CalcularTotalAporte()));
+            Assert.True(ativo.QtdCotas.Equals(10));
             Assert.True(ativo.SaldoAtual.Equals(ativo.TotalInvestido));
             Assert.True(ativo.GanhoPerda.Equals(0));
 
@@ -90,7 +91,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
             ativo.AddProvento(novoProvento);
 
             Assert.True(ativo.Proventos.Count.Equals(1));
-            Assert.True(ativo.TotalProventos.Equals(novoProvento.CalculaTotalProvento()));
+            Assert.True(ativo.TotalProventos.Equals(87.00m));
         }
 
         [Fact(DisplayName = "Ao adicionar uma venda deve lançar exception se venda não pode ser realizada")]
@@ -106,14 +107,14 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
 
             var result = Assert.Throws<ApplicationException>(() => ativo.AddVenda(novaVenda));
 
-            Assert.Equal("Quantidade de venda maior que o Total.", result.Message);
+            Assert.Equal("Quantidade de venda maior que o total de cotas do ativo.", result.Message);
 
         }
 
         [Fact(DisplayName = "Ao adicionar uma venda deve calcular qtdCotas, totalResgatado e ganhoPerda")]
         public void Teste6()
         {
-            var ativo = ObterAtivoComAportes();
+            var ativo = ObterAtivoComValores();
             ativo.Vendas = new List<Venda>();
 
             var novaVenda = new Venda();
@@ -132,7 +133,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         [Fact(DisplayName = "Ao adicionar nova cotação deve setar cotacaoAtual e calcular ganhoPerda")]
         public void Teste7()
         {
-            var ativo = ObterAtivoComAportes();
+            var ativo = ObterAtivoComValores();
             ativo.Cotacoes = new List<Cotacao>();
 
             var novaCotacao = new Cotacao();
@@ -147,16 +148,91 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         [Fact(DisplayName = "Calcula percentual do ativo na carteira")]
         public void Teste8()
         {
-            var ativo = ObterAtivoComAportes();
+            var ativo = ObterAtivoComValores();
             var percentual = ativo.CalculaPercentualNaCarteira(100000.00m);
 
             Assert.True(percentual.ToString("P2").Equals("10,00%"));
         }
 
-        private Ativo ObterAtivoComAportes()
+        [Fact(DisplayName = "Ao remover um aporte deve calcular precoMedio, totalInvestido, qtdCotas, saldoAtual e ganhoPerda")]
+        public void Teste9()
+        {
+            var ativo = new Ativo();
+            ativo.CotacaoAtual = 55.00m;
+            ativo.Aportes = new List<Aporte>();
+
+            var aporte1 = new Aporte();
+            aporte1.QtdCotas = 10;
+            aporte1.VlUnitario = 60.00m;
+            ativo.AddAporte(aporte1);           
+
+            var aporte2 = new Aporte();
+            aporte2.QtdCotas = 10;
+            aporte2.VlUnitario = 50.00m;
+            ativo.AddAporte(aporte2);            
+
+            ativo.RemoveAporte(aporte2);
+
+            Assert.True(ativo.Aportes.Count.Equals(1));
+            Assert.True(ativo.PrecoMedio.Equals(60.00m));
+            Assert.True(ativo.TotalInvestido.Equals(600.00m));
+            Assert.True(ativo.QtdCotas.Equals(10));
+            Assert.True(ativo.SaldoAtual.Equals(ativo.TotalInvestido));
+            Assert.True(ativo.GanhoPerda.Equals(-50));
+
+        }
+
+        [Fact(DisplayName = "Ao remover um provento deve calcular totalProventos")]
+        public void Teste10()
+        {
+            var ativo = new Ativo();
+            ativo.Proventos = new List<Provento>();
+
+            var provento1 = new Provento();
+            provento1.VlUnitario = 0.87m;
+            provento1.QtdCotas = 100;
+            ativo.AddProvento(provento1);
+
+            var provento2 = new Provento();
+            provento2.VlUnitario = 0.87m;
+            provento2.QtdCotas = 100;
+            ativo.AddProvento(provento2);
+
+            ativo.RemoveProvento(provento2);
+
+            Assert.True(ativo.Proventos.Count.Equals(1));
+            Assert.True(ativo.TotalProventos.Equals(87.00m));
+        }
+
+        [Fact(DisplayName = "Ao remover uma venda deve calcular qtdCotas, totalResgatado e ganhoPerda")]
+        public void Teste11()
+        {
+            var ativo = ObterAtivoComValores();            
+            ativo.Vendas = new List<Venda>();
+
+            var venda1 = new Venda();
+            venda1.VlUnitario = 80.00m;
+            venda1.QtdCotas = 10;
+            ativo.AddVenda(venda1);
+
+            var venda2 = new Venda();
+            venda2.VlUnitario = 80.00m;
+            venda2.QtdCotas = 10;
+            ativo.AddVenda(venda2);
+
+            ativo.RemoveVenda(venda2);
+
+            Assert.True(ativo.Vendas.Count.Equals(1));
+            Assert.True(ativo.QtdCotas.Equals(90));
+            Assert.True(ativo.TotalResgatado.Equals(800.00m));
+            Assert.True(ativo.GanhoPerda.Equals(-1800.00m));
+        }
+
+        private Ativo ObterAtivoComValores()
         {
             return new Ativo()
             {
+                TotalInvestido = 10000.00m,
                 QtdCotas = 100,
                 SaldoAtual = 10000.00m,
                 PrecoMedio = 100.00m,
@@ -168,7 +244,6 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         {
             return _repository.Object;
         }
-
 
         private readonly Mock<IRepository> _repository = new();
     }

@@ -20,7 +20,6 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
             }
 
             return novaLista;
-
         }
 
         public static AtivoView ConvertToView(this Ativo item, decimal totalInvestido)
@@ -40,9 +39,9 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 TotalResgatado = item.TotalResgatado,
                 SaldoAtual = item.SaldoAtual,
                 PercentualNaCarteira = item.CalculaPercentualNaCarteira(totalInvestido),
-                GanhaPerde = item.GanhoPerda
+                GanhaPerde = item.GanhoPerda,
+                CotacaoAtual = item.CotacaoAtual
             };
         }
-
     }
 }

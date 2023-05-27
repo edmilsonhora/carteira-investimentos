@@ -35,6 +35,7 @@
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             groupBox1 = new GroupBox();
             textValorCompra = new TextBox();
             btnSalvarAportes = new Button();
@@ -47,15 +48,6 @@
             dropTicker = new ComboBox();
             groupBox2 = new GroupBox();
             gridAtivos = new DataGridView();
-            Ticker = new DataGridViewTextBoxColumn();
-            QtdTotal = new DataGridViewTextBoxColumn();
-            TotalInvestido = new DataGridViewTextBoxColumn();
-            PrecoMedio = new DataGridViewTextBoxColumn();
-            TotalProventos = new DataGridViewTextBoxColumn();
-            TotalResgatado = new DataGridViewTextBoxColumn();
-            SaldoAtual = new DataGridViewTextBoxColumn();
-            PercentualNaCarteira = new DataGridViewTextBoxColumn();
-            GanhaPerde = new DataGridViewTextBoxColumn();
             lblTotalProvRecebidos = new Label();
             label9 = new Label();
             groupBox3 = new GroupBox();
@@ -88,6 +80,16 @@
             label16 = new Label();
             lblTotalSaldoAtual = new Label();
             label18 = new Label();
+            Ticker = new DataGridViewTextBoxColumn();
+            QtdTotal = new DataGridViewTextBoxColumn();
+            TotalInvestido = new DataGridViewTextBoxColumn();
+            PrecoMedio = new DataGridViewTextBoxColumn();
+            TotalProventos = new DataGridViewTextBoxColumn();
+            TotalResgatado = new DataGridViewTextBoxColumn();
+            SaldoAtual = new DataGridViewTextBoxColumn();
+            PercentualNaCarteira = new DataGridViewTextBoxColumn();
+            GanhaPerde = new DataGridViewTextBoxColumn();
+            CotacaoAtual = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtQuantidade).BeginInit();
             groupBox2.SuspendLayout();
@@ -215,7 +217,7 @@
             groupBox2.Margin = new Padding(3, 2, 3, 2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 2, 3, 2);
-            groupBox2.Size = new Size(1012, 290);
+            groupBox2.Size = new Size(1154, 290);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Ativos:";
@@ -226,121 +228,16 @@
             gridAtivos.AllowUserToDeleteRows = false;
             gridAtivos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             gridAtivos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridAtivos.Columns.AddRange(new DataGridViewColumn[] { Ticker, QtdTotal, TotalInvestido, PrecoMedio, TotalProventos, TotalResgatado, SaldoAtual, PercentualNaCarteira, GanhaPerde });
+            gridAtivos.Columns.AddRange(new DataGridViewColumn[] { Ticker, QtdTotal, TotalInvestido, PrecoMedio, TotalProventos, TotalResgatado, SaldoAtual, PercentualNaCarteira, GanhaPerde, CotacaoAtual });
             gridAtivos.Location = new Point(17, 32);
             gridAtivos.Margin = new Padding(3, 2, 3, 2);
             gridAtivos.Name = "gridAtivos";
             gridAtivos.ReadOnly = true;
             gridAtivos.RowHeadersWidth = 51;
             gridAtivos.RowTemplate.Height = 29;
-            gridAtivos.Size = new Size(968, 235);
+            gridAtivos.Size = new Size(1110, 235);
             gridAtivos.TabIndex = 0;
             gridAtivos.CellFormatting += gridAtivos_CellFormatting;
-            // 
-            // Ticker
-            // 
-            Ticker.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Ticker.DataPropertyName = "Ticker";
-            Ticker.HeaderText = "Ticker";
-            Ticker.MinimumWidth = 6;
-            Ticker.Name = "Ticker";
-            Ticker.ReadOnly = true;
-            Ticker.Width = 63;
-            // 
-            // QtdTotal
-            // 
-            QtdTotal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            QtdTotal.DataPropertyName = "QtdTotal";
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            QtdTotal.DefaultCellStyle = dataGridViewCellStyle1;
-            QtdTotal.HeaderText = "Qtd. Total";
-            QtdTotal.MinimumWidth = 6;
-            QtdTotal.Name = "QtdTotal";
-            QtdTotal.ReadOnly = true;
-            QtdTotal.Width = 83;
-            // 
-            // TotalInvestido
-            // 
-            TotalInvestido.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            TotalInvestido.DataPropertyName = "TotalInvestido";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            TotalInvestido.DefaultCellStyle = dataGridViewCellStyle2;
-            TotalInvestido.HeaderText = "Tot. Investido";
-            TotalInvestido.MinimumWidth = 6;
-            TotalInvestido.Name = "TotalInvestido";
-            TotalInvestido.ReadOnly = true;
-            TotalInvestido.Width = 102;
-            // 
-            // PrecoMedio
-            // 
-            PrecoMedio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            PrecoMedio.DataPropertyName = "PrecoMedio";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            PrecoMedio.DefaultCellStyle = dataGridViewCellStyle3;
-            PrecoMedio.HeaderText = "Preço Médio";
-            PrecoMedio.MinimumWidth = 6;
-            PrecoMedio.Name = "PrecoMedio";
-            PrecoMedio.ReadOnly = true;
-            PrecoMedio.Width = 99;
-            // 
-            // TotalProventos
-            // 
-            TotalProventos.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            TotalProventos.DataPropertyName = "TotalProventos";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            TotalProventos.DefaultCellStyle = dataGridViewCellStyle4;
-            TotalProventos.HeaderText = "Tot. Proventos";
-            TotalProventos.MinimumWidth = 6;
-            TotalProventos.Name = "TotalProventos";
-            TotalProventos.ReadOnly = true;
-            TotalProventos.Width = 107;
-            // 
-            // TotalResgatado
-            // 
-            TotalResgatado.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            TotalResgatado.DataPropertyName = "TotalResgatado";
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            TotalResgatado.DefaultCellStyle = dataGridViewCellStyle5;
-            TotalResgatado.HeaderText = "Tot. Resgate";
-            TotalResgatado.MinimumWidth = 6;
-            TotalResgatado.Name = "TotalResgatado";
-            TotalResgatado.ReadOnly = true;
-            TotalResgatado.Width = 95;
-            // 
-            // SaldoAtual
-            // 
-            SaldoAtual.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            SaldoAtual.DataPropertyName = "SaldoAtual";
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            SaldoAtual.DefaultCellStyle = dataGridViewCellStyle6;
-            SaldoAtual.HeaderText = "Saldo Atual";
-            SaldoAtual.MinimumWidth = 6;
-            SaldoAtual.Name = "SaldoAtual";
-            SaldoAtual.ReadOnly = true;
-            SaldoAtual.Width = 92;
-            // 
-            // PercentualNaCarteira
-            // 
-            PercentualNaCarteira.DataPropertyName = "PercentualNaCarteira";
-            dataGridViewCellStyle7.Format = "P2";
-            PercentualNaCarteira.DefaultCellStyle = dataGridViewCellStyle7;
-            PercentualNaCarteira.HeaderText = "Percent (%)";
-            PercentualNaCarteira.MinimumWidth = 6;
-            PercentualNaCarteira.Name = "PercentualNaCarteira";
-            PercentualNaCarteira.ReadOnly = true;
-            PercentualNaCarteira.Width = 125;
-            // 
-            // GanhaPerde
-            // 
-            GanhaPerde.DataPropertyName = "GanhaPerde";
-            GanhaPerde.HeaderText = "Ganha/Perde";
-            GanhaPerde.Name = "GanhaPerde";
-            GanhaPerde.ReadOnly = true;
             // 
             // lblTotalProvRecebidos
             // 
@@ -672,11 +569,126 @@
             label18.TabIndex = 13;
             label18.Text = "Total Saldo Atual:";
             // 
+            // Ticker
+            // 
+            Ticker.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Ticker.DataPropertyName = "Ticker";
+            Ticker.HeaderText = "Ticker";
+            Ticker.MinimumWidth = 6;
+            Ticker.Name = "Ticker";
+            Ticker.ReadOnly = true;
+            Ticker.Width = 63;
+            // 
+            // QtdTotal
+            // 
+            QtdTotal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            QtdTotal.DataPropertyName = "QtdTotal";
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            QtdTotal.DefaultCellStyle = dataGridViewCellStyle1;
+            QtdTotal.HeaderText = "Qtd. Total";
+            QtdTotal.MinimumWidth = 6;
+            QtdTotal.Name = "QtdTotal";
+            QtdTotal.ReadOnly = true;
+            QtdTotal.Width = 83;
+            // 
+            // TotalInvestido
+            // 
+            TotalInvestido.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            TotalInvestido.DataPropertyName = "TotalInvestido";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            TotalInvestido.DefaultCellStyle = dataGridViewCellStyle2;
+            TotalInvestido.HeaderText = "Tot. Investido";
+            TotalInvestido.MinimumWidth = 6;
+            TotalInvestido.Name = "TotalInvestido";
+            TotalInvestido.ReadOnly = true;
+            TotalInvestido.Width = 102;
+            // 
+            // PrecoMedio
+            // 
+            PrecoMedio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            PrecoMedio.DataPropertyName = "PrecoMedio";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            PrecoMedio.DefaultCellStyle = dataGridViewCellStyle3;
+            PrecoMedio.HeaderText = "Preço Médio";
+            PrecoMedio.MinimumWidth = 6;
+            PrecoMedio.Name = "PrecoMedio";
+            PrecoMedio.ReadOnly = true;
+            PrecoMedio.Width = 99;
+            // 
+            // TotalProventos
+            // 
+            TotalProventos.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            TotalProventos.DataPropertyName = "TotalProventos";
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            TotalProventos.DefaultCellStyle = dataGridViewCellStyle4;
+            TotalProventos.HeaderText = "Tot. Proventos";
+            TotalProventos.MinimumWidth = 6;
+            TotalProventos.Name = "TotalProventos";
+            TotalProventos.ReadOnly = true;
+            TotalProventos.Width = 107;
+            // 
+            // TotalResgatado
+            // 
+            TotalResgatado.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            TotalResgatado.DataPropertyName = "TotalResgatado";
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            TotalResgatado.DefaultCellStyle = dataGridViewCellStyle5;
+            TotalResgatado.HeaderText = "Tot. Resgate";
+            TotalResgatado.MinimumWidth = 6;
+            TotalResgatado.Name = "TotalResgatado";
+            TotalResgatado.ReadOnly = true;
+            TotalResgatado.Width = 95;
+            // 
+            // SaldoAtual
+            // 
+            SaldoAtual.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            SaldoAtual.DataPropertyName = "SaldoAtual";
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            SaldoAtual.DefaultCellStyle = dataGridViewCellStyle6;
+            SaldoAtual.HeaderText = "Saldo Atual";
+            SaldoAtual.MinimumWidth = 6;
+            SaldoAtual.Name = "SaldoAtual";
+            SaldoAtual.ReadOnly = true;
+            SaldoAtual.Width = 92;
+            // 
+            // PercentualNaCarteira
+            // 
+            PercentualNaCarteira.DataPropertyName = "PercentualNaCarteira";
+            dataGridViewCellStyle7.Format = "P2";
+            PercentualNaCarteira.DefaultCellStyle = dataGridViewCellStyle7;
+            PercentualNaCarteira.HeaderText = "Percent (%)";
+            PercentualNaCarteira.MinimumWidth = 6;
+            PercentualNaCarteira.Name = "PercentualNaCarteira";
+            PercentualNaCarteira.ReadOnly = true;
+            PercentualNaCarteira.Width = 125;
+            // 
+            // GanhaPerde
+            // 
+            GanhaPerde.DataPropertyName = "GanhaPerde";
+            GanhaPerde.HeaderText = "Ganha/Perde";
+            GanhaPerde.Name = "GanhaPerde";
+            GanhaPerde.ReadOnly = true;
+            // 
+            // CotacaoAtual
+            // 
+            CotacaoAtual.DataPropertyName = "CotacaoAtual";
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.NullValue = null;
+            CotacaoAtual.DefaultCellStyle = dataGridViewCellStyle8;
+            CotacaoAtual.HeaderText = "Cot. Atual";
+            CotacaoAtual.Name = "CotacaoAtual";
+            CotacaoAtual.ReadOnly = true;
+            // 
             // Inicial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1064, 586);
+            ClientSize = new Size(1206, 586);
             Controls.Add(lblTotalSaldoAtual);
             Controls.Add(label18);
             Controls.Add(lblTotalResgatado);
@@ -764,5 +776,6 @@
         private DataGridViewTextBoxColumn SaldoAtual;
         private DataGridViewTextBoxColumn PercentualNaCarteira;
         private DataGridViewTextBoxColumn GanhaPerde;
+        private DataGridViewTextBoxColumn CotacaoAtual;
     }
 }

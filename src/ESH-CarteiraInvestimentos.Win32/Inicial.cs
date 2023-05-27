@@ -19,10 +19,16 @@ namespace ESH_CarteiraInvestimentos.Win32
         {
             _facade = new Facade();
             InitializeComponent();
+            AtualizarCotacao();
             gridAtivos.AutoGenerateColumns = false;
             CarregarDropsTickers();
             CarregarGridAtivos();
             AtualizarData();
+        }
+
+        private void AtualizarCotacao()
+        {
+            _ = _facade.Cotacoes.ObterUltimasCotacoes();
         }
 
         private void AtualizarData()
@@ -189,7 +195,7 @@ namespace ESH_CarteiraInvestimentos.Win32
         {
             if (e.ColumnIndex == 8)
             {
-               
+
 
                 if (Convert.ToDecimal(e.Value) < 0)
                 {
