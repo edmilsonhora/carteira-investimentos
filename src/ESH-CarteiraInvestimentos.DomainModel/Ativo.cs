@@ -1,11 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace ESH_CarteiraInvestimentos.DomainModel
 {
     public class Ativo : EntityBase
     {
+        private List<Aporte> _aportes;
+        private List<Venda> _vendas;
+        private List<Provento> _proventos;
+        private List<Cotacao> _cotacoes;
+
+        public Ativo()
+        {
+            _proventos = new List<Provento>();
+            _aportes = new List<Aporte>();
+            _vendas = new List<Venda>();
+            _cotacoes = new List<Cotacao>();
+        }
+
         public string Ticker { get; set; }
         public string CNPJ { get; set; }
         public Tipo Tipo { get; set; }
@@ -18,10 +32,10 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public bool EhAtivo { get; set; }
         public decimal CotacaoAtual { get; set; }
         public decimal GanhoPerda { get; set; }
-        public List<Aporte> Aportes { get; set; }
-        public List<Provento> Proventos { get; set; }
-        public List<Venda> Vendas { get; set; }
-        public List<Cotacao> Cotacoes { get; set; }
+        public IEnumerable<Aporte> Aportes { get { return _aportes; } private set { _aportes = value.ToList(); } }
+        public IEnumerable<Provento> Proventos { get { return _proventos; } private set { _proventos = value.ToList(); } }
+        public IEnumerable<Venda> Vendas { get { return _vendas; } private set { _vendas = value.ToList(); } }
+        public IEnumerable<Cotacao> Cotacoes { get { return _cotacoes; } private set { _cotacoes = value.ToList(); } }
         [NotMapped]
         public IRepository Repository { get; set; }
 
@@ -38,7 +52,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         }
         public void AddAporte(Aporte aporte)
         {
-            Aportes.Add(aporte);
+            _aportes.Add(aporte);
             PrecoMedio = CalcularPrecoMedio(aporte);
             TotalInvestido += aporte.CalcularTotalAporte();
             QtdCotas += aporte.QtdCotas;
@@ -47,7 +61,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         }
         public void RemoveAporte(Aporte aporte)
         {
-            Aportes.Remove(aporte);
+            _aportes.Remove(aporte);
             PrecoMedio = RecalcularPrecoMedio(aporte);
             TotalInvestido -= aporte.CalcularTotalAporte();
             QtdCotas -= aporte.QtdCotas;
@@ -56,18 +70,18 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         }
         public void AddProvento(Provento provento)
         {
-            Proventos.Add(provento);
+            _proventos.Add(provento);
             TotalProventos += provento.CalcularTotalProvento();
         }
         public void RemoveProvento(Provento provento)
         {
-            Proventos.Remove(provento);
+            _proventos.Remove(provento);
             TotalProventos -= provento.CalcularTotalProvento();
         }
         public void AddVenda(Venda venda)
         {
             venda.ValidaSePodeSerRealizada(QtdCotas);
-            Vendas.Add(venda);
+            _vendas.Add(venda);
             TotalResgatado += venda.CalcularTotalVenda();
             QtdCotas -= venda.QtdCotas;
             CalculaSaldoAtual();
@@ -80,7 +94,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         }
         public void RemoveVenda(Venda venda)
         {
-            Vendas.Remove(venda);
+            _vendas.Remove(venda);
             TotalResgatado -= venda.CalcularTotalVenda();
             QtdCotas += venda.QtdCotas;
             CalculaSaldoAtual();
@@ -88,7 +102,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         }
         public void AddCotacao(Cotacao cotacao)
         {
-            Cotacoes.Add(cotacao);
+            _cotacoes.Add(cotacao);
             CotacaoAtual = cotacao.Preco;
             CalculaGanhoPerda();
         }

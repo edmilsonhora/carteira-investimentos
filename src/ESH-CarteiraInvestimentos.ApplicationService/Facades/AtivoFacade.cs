@@ -42,8 +42,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
             obj.CNPJ = view.CNPJ;
             obj.Ticker = view.Ticker;
             obj.Tipo = view.Tipo;
-            obj.Repository = _repository;
-            obj.Aportes = new List<Aporte>();
+            obj.Repository = _repository;            
             obj.Validar();
 
             var aporte = new Aporte();
@@ -52,7 +51,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
             aporte.QtdCotas = view.QtdCompra;
             aporte.Validar();
 
-            obj.Aportes.Add(aporte);
+            obj.AddAporte(aporte);
 
             _repository.Ativos.Salvar(obj);
         }
