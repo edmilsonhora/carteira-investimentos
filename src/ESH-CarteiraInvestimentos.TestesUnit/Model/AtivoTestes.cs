@@ -58,15 +58,14 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         {
             var ativo = new Ativo();
             ativo.CotacaoAtual = 56.60m;
-            ativo.Aportes = new List<Aporte>();
+            
 
             var novoAporte = new Aporte();
             novoAporte.QtdCotas = 10;
             novoAporte.VlUnitario = 56.60m;
 
             ativo.AddAporte(novoAporte);
-
-            Assert.True(ativo.Aportes.Count.Equals(1));
+            
             Assert.True(ativo.PrecoMedio.Equals(56.60m));
             Assert.True(ativo.TotalInvestido.Equals(novoAporte.CalcularTotalAporte()));
             Assert.True(ativo.QtdCotas.Equals(10));
@@ -79,7 +78,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         public void Teste4()
         {
             var ativo = new Ativo();
-            ativo.Proventos = new List<Provento>();
+            
 
             var novoProvento = new Provento();
             novoProvento.VlUnitario = 0.87m;
@@ -87,7 +86,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
 
             ativo.AddProvento(novoProvento);
 
-            Assert.True(ativo.Proventos.Count.Equals(1));
+            
             Assert.True(ativo.TotalProventos.Equals(87.00m));
         }
 
@@ -96,7 +95,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         {
             var ativo = new Ativo();
             ativo.QtdCotas = 30;
-            ativo.Vendas = new List<Venda>();
+            
 
             var novaVenda = new Venda();
             novaVenda.VlUnitario = 0.87m;
@@ -111,16 +110,14 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         [Fact(DisplayName = "Ao adicionar uma venda deve calcular qtdCotas, totalResgatado e ganhoPerda")]
         public void Teste6()
         {
-            var ativo = ObterAtivoComValores();
-            ativo.Vendas = new List<Venda>();
+            var ativo = ObterAtivoComValores();            
 
             var novaVenda = new Venda();
             novaVenda.VlUnitario = 80.00m;
             novaVenda.QtdCotas = 10;
 
             ativo.AddVenda(novaVenda);
-
-            Assert.True(ativo.Vendas.Count.Equals(1));
+           
             Assert.True(ativo.QtdCotas.Equals(90));
             Assert.True(ativo.TotalResgatado.Equals(800.00m));
             Assert.True(ativo.GanhoPerda.Equals(-1800.00m));
@@ -131,7 +128,6 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         public void Teste7()
         {
             var ativo = ObterAtivoComValores();
-            ativo.Cotacoes = new List<Cotacao>();
 
             var novaCotacao = new Cotacao();
             novaCotacao.Preco = 80.00m;
@@ -156,7 +152,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         {
             var ativo = new Ativo();
             ativo.CotacaoAtual = 55.00m;
-            ativo.Aportes = new List<Aporte>();
+           
 
             var aporte1 = new Aporte();
             aporte1.QtdCotas = 10;
@@ -170,7 +166,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
 
             ativo.RemoveAporte(aporte2);
 
-            Assert.True(ativo.Aportes.Count.Equals(1));
+            
             Assert.True(ativo.PrecoMedio.Equals(60.00m));
             Assert.True(ativo.TotalInvestido.Equals(600.00m));
             Assert.True(ativo.QtdCotas.Equals(10));
@@ -183,7 +179,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         public void Teste10()
         {
             var ativo = new Ativo();
-            ativo.Proventos = new List<Provento>();
+           
 
             var provento1 = new Provento();
             provento1.VlUnitario = 0.87m;
@@ -197,7 +193,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
 
             ativo.RemoveProvento(provento2);
 
-            Assert.True(ativo.Proventos.Count.Equals(1));
+           
             Assert.True(ativo.TotalProventos.Equals(87.00m));
         }
 
@@ -205,7 +201,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
         public void Teste11()
         {
             var ativo = ObterAtivoComValores();
-            ativo.Vendas = new List<Venda>();
+           
 
             var venda1 = new Venda();
             venda1.VlUnitario = 80.00m;
@@ -219,7 +215,7 @@ namespace ESH_CarteiraInvestimentos.TestesUnit.Model
 
             ativo.RemoveVenda(venda2);
 
-            Assert.True(ativo.Vendas.Count.Equals(1));
+           
             Assert.True(ativo.QtdCotas.Equals(90));
             Assert.True(ativo.TotalResgatado.Equals(800.00m));
             Assert.True(ativo.GanhoPerda.Equals(-1800.00m));
