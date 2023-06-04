@@ -17,6 +17,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Views
         public decimal PercentualNaCarteira { get; set; }
         public decimal GanhaPerde { get; set; }
         public decimal CotacaoAtual { get; set; }
+        public decimal SaldoInvestido { get; set; }
     }
 
     public interface IAtivoFacade : IFacadeBase<AtivoView>

@@ -36,7 +36,8 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Adapters
                 SaldoAtual = item.SaldoAtual,
                 PercentualNaCarteira = item.CalculaPercentualNaCarteira(totalInvestido),
                 GanhaPerde = item.GanhoPerda,
-                CotacaoAtual = item.CotacaoAtual
+                CotacaoAtual = item.CotacaoAtual,
+                SaldoInvestido = item.SaldoInvestido
             };
         }
     }
