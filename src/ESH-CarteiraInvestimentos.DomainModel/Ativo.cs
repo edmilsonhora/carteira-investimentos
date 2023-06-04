@@ -32,6 +32,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         public bool EhAtivo { get; set; }
         public decimal CotacaoAtual { get; set; }
         public decimal GanhoPerda { get; set; }
+        public decimal SaldoInvestido { get; set; }
         public IEnumerable<Aporte> Aportes { get { return _aportes; } private set { _aportes = value.ToList(); } }
         public IEnumerable<Provento> Proventos { get { return _proventos; } private set { _proventos = value.ToList(); } }
         public IEnumerable<Venda> Vendas { get { return _vendas; } private set { _vendas = value.ToList(); } }
@@ -105,6 +106,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
             _cotacoes.Add(cotacao);
             CotacaoAtual = cotacao.Preco;
             CalculaGanhoPerda();
+            CalculaSaldoInvestido();
         }
         public decimal CalculaPercentualNaCarteira(decimal totalInvestido)
         {
@@ -164,6 +166,11 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         private void CalculaGanhoPerda()
         {
             GanhoPerda = decimal.Subtract(decimal.Multiply(CotacaoAtual, QtdCotas), decimal.Multiply(PrecoMedio, QtdCotas));
+        }
+
+        private void CalculaSaldoInvestido()
+        {
+            SaldoInvestido = decimal.Subtract(decimal.Subtract(TotalInvestido, TotalResgatado), -GanhoPerda);
         }
 
         #endregion

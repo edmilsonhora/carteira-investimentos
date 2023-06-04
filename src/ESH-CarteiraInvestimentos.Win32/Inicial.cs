@@ -39,6 +39,7 @@ namespace ESH_CarteiraInvestimentos.Win32
             lblTotalInvestido.Text = lista.Sum(p => p.TotalInvestido).ToString("C");
             lblTotalResgatado.Text = lista.Sum(p => p.TotalResgatado).ToString("C");
             lblTotalSaldoAtual.Text = lista.Sum(p => p.SaldoAtual).ToString("C");
+            lblTotalGanhaPerde.Text = lista.Sum(p => p.GanhaPerde).ToString("C");
         }
 
         private void CarregarDropsTickers()
