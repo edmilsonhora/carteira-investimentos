@@ -112,6 +112,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
         {
             return decimal.Divide(SaldoAtual, totalInvestido);
         }
+
         #region metodosPrivados
 
         //private decimal CalcularPrecoMedio()
@@ -160,7 +161,7 @@ namespace ESH_CarteiraInvestimentos.DomainModel
 
         private void CalculaSaldoAtual()
         {
-            SaldoAtual = decimal.Subtract(TotalInvestido, TotalResgatado);
+            SaldoAtual = decimal.Subtract(TotalInvestido, decimal.Add(TotalResgatado, -GanhoPerda));
         }
 
         private void CalculaGanhoPerda()
