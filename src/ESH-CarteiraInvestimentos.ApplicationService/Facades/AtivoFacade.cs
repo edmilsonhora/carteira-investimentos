@@ -42,6 +42,7 @@ namespace ESH_CarteiraInvestimentos.ApplicationService.Facades
             obj.CNPJ = view.CNPJ;
             obj.Ticker = view.Ticker;
             obj.Tipo = view.Tipo;
+            obj.EhAtivo = true;
             obj.Repository = _repository;            
             obj.Validar();
 
